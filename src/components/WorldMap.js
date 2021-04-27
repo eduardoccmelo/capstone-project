@@ -88,7 +88,7 @@ export default function WorldMap() {
           })}
       </ReactMapGl>
 
-      <label for="filterInput">Country Name:</label>
+      <label htmlFor="filterInput">Country Name:</label>
       <input
         placeholder="Type the name of the country"
         className="filterInput"
@@ -110,7 +110,7 @@ export default function WorldMap() {
                 value={name}
               ></input>
 
-              <span>{name}</span>
+              <span key={name}>{name}</span>
             </div>
           );
         })}
