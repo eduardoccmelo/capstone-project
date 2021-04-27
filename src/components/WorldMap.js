@@ -10,7 +10,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 
 export default function WorldMap() {
   const [countries, setCountries] = useState([]);
-  const [visitedCountries, setVisitedCountries] = useState(Number(0));
+  const [visitedCountries, setVisitedCountries] = useState(0);
   const [filterInputValue, setFilterInputValue] = useState("");
   const [markers, setMarkers] = useState([]);
   const [viewPort, setViewPort] = useState({
@@ -39,7 +39,6 @@ export default function WorldMap() {
         .toLowerCase()
         .includes(filterInputValue.toLowerCase());
     });
-  console.log(filteredCountries);
 
   useEffect(() => {
     fetch("https://restcountries.eu/rest/v2/all")
@@ -84,9 +83,7 @@ export default function WorldMap() {
       <div>{textContent}</div>
       <ReactMapGl
         {...viewPort}
-        mapboxApiAccessToken={
-          "pk.eyJ1IjoiZWR1YXJkb2NjbWVsbyIsImEiOiJja250MThsZ2wwOXA0MnZuM3hvYnhtM2dvIn0.hUiO7xIIMMnn4NNRl1kmPw"
-        }
+        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_KEY}
         mapStyle="mapbox://styles/eduardoccmelo/cknt22q320tjn18mug9tx4v89"
         onViewportChange={(viewPort) => {
           setViewPort(viewPort);
@@ -130,7 +127,6 @@ export default function WorldMap() {
                 className="checkbox"
                 type="checkbox"
                 value={name}
-                key={name}
               ></input>
 
               <span key={name}>{name}</span>
