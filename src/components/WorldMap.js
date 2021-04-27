@@ -92,7 +92,11 @@ export default function WorldMap() {
         {markers.length > 0 &&
           markers.map((marker) => {
             return (
-              <Marker latitude={marker[0]} longitude={marker[1]}>
+              <Marker
+                key={`${marker[0]}${marker[1]}`}
+                latitude={marker[0]}
+                longitude={marker[1]}
+              >
                 <div>
                   <i className="fas fa-check-circle"></i>
                 </div>
