@@ -9,10 +9,10 @@ export default function WorldMap() {
   const [filterInputValue, setFilterInputValue] = useState("");
   const [markers, setMarkers] = useState([]);
   const [viewPort, setViewPort] = useState({
-    latitude: 1.344,
-    longitude: 0,
+    latitude: 42.123,
+    longitude: 10.123,
     width: "520px",
-    height: "450px",
+    height: "370px",
     zoom: 0,
   });
 
@@ -108,6 +108,7 @@ export default function WorldMap() {
                 className="checkbox"
                 type="checkbox"
                 value={name}
+                key={name}
               ></input>
 
               <span key={name}>{name}</span>
