@@ -1,0 +1,4 @@
+.NewTripForm {
+  display: flex;
+  flex-direction: column;
+}

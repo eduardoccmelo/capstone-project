@@ -1,0 +1,4 @@
+.MyTrips {
+  display: flex;
+  flex-direction: column;
+}
