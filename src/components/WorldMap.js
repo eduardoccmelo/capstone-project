@@ -1,7 +1,12 @@
 import "./styles/WorldMap.css";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import ReactMapGl, { Marker } from "react-map-gl";
+import ReactMapGl, {
+  Marker,
+  GeolocateControl,
+  NavigationControl,
+} from "react-map-gl";
+import "mapbox-gl/dist/mapbox-gl.css";
 
 export default function WorldMap() {
   const [countries, setCountries] = useState([]);
@@ -15,6 +20,17 @@ export default function WorldMap() {
     height: "370px",
     zoom: 0,
   });
+
+  const geolocateStyle = {
+    float: "left",
+    margin: "10px",
+    padding: "10px",
+  };
+
+  const navControlStyle = {
+    right: 10,
+    top: 10,
+  };
 
   const filteredCountries =
     countries.length > 0 &&
@@ -86,6 +102,12 @@ export default function WorldMap() {
               </Marker>
             );
           })}
+        <NavigationControl style={navControlStyle} />
+        <GeolocateControl
+          style={geolocateStyle}
+          positionOptions={{ enableHighAccuracy: true }}
+          trackUserLocation={true}
+        />
       </ReactMapGl>
 
       <label htmlFor="filterInput">Country Name:</label>
