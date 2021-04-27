@@ -58,13 +58,6 @@ export default function WorldMap() {
 
   function handleOnName(e) {
     setFilterInputValue(e.target.value);
-    // console.log(inputValue);
-    // for (let i = 0; i < countries.length; i++) {
-    //   if (countries[i].name.toLowerCase().includes(inputValue.toLowerCase())) {
-    //     console.log(countries[i]);
-    // setCountries(countries[i]);
-    //   }
-    // }
   }
 
   return (
@@ -72,6 +65,7 @@ export default function WorldMap() {
       <h2>WorldMap</h2>
       <Link to="/">Home</Link>
       <Link to="/myTrips">My Trips</Link>
+      <div>{textContent}</div>
       <ReactMapGl
         {...viewPort}
         mapboxApiAccessToken={
@@ -94,13 +88,15 @@ export default function WorldMap() {
           })}
       </ReactMapGl>
 
-      <div>{textContent}</div>
-
+      <label for={filterInputValue}>Country Name:</label>
       <input
-        placeholder="filter"
+        placeholder="Type the name of the country"
+        className="filterInput"
         value={filterInputValue}
+        id={filterInputValue}
         onChange={handleOnName}
       ></input>
+      {filteredCountries.length === 0 && <div>No results</div>}
 
       {filteredCountries &&
         filteredCountries.map((country) => {
@@ -113,6 +109,7 @@ export default function WorldMap() {
                 type="checkbox"
                 value={name}
               ></input>
+
               <span>{name}</span>
             </div>
           );
