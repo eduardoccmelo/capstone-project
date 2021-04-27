@@ -9,9 +9,9 @@ export default function WorldMap() {
   const [filterInputValue, setFilterInputValue] = useState("");
   const [markers, setMarkers] = useState([]);
   const [viewPort, setViewPort] = useState({
-    latitude: 42.4211,
-    longitude: 24.345,
-    width: "590px",
+    latitude: 1.344,
+    longitude: 0,
+    width: "520px",
     height: "450px",
     zoom: 0,
   });
