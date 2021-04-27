@@ -88,12 +88,12 @@ export default function WorldMap() {
           })}
       </ReactMapGl>
 
-      <label for={filterInputValue}>Country Name:</label>
+      <label for="filterInput">Country Name:</label>
       <input
         placeholder="Type the name of the country"
         className="filterInput"
         value={filterInputValue}
-        id={filterInputValue}
+        id="filterInput"
         onChange={handleOnName}
       ></input>
       {filteredCountries.length === 0 && <div>No results</div>}
