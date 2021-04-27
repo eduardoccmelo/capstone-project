@@ -1,12 +1,11 @@
-import { useHistory } from "react-router";
+import "./styles/NewTrip.css";
 import { Link } from "react-router-dom";
 
 export default function NewTrip() {
-  const history = useHistory();
   return (
     <div className="newTrip">
       <h2>New Trip</h2>
-      <form className="newTripForm">
+      <form className="NewTripForm">
         <textarea></textarea>
         <button
           type="submit"

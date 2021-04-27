@@ -1,0 +1,4 @@
+.EditTrip {
+  display: flex;
+  flex-direction: column;
+}
