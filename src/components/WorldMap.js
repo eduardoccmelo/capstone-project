@@ -1,3 +1,4 @@
+import "./styles/WorldMap.css";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ReactMapGl, { Marker } from "react-map-gl";
@@ -5,7 +6,7 @@ import ReactMapGl, { Marker } from "react-map-gl";
 export default function WorldMap() {
   const [countries, setCountries] = useState([]);
   const [visitedCountries, setVisitedCountries] = useState(Number(0));
-  const [filterName, setFilterName] = useState("");
+  const [filterInputValue, setFilterInputValue] = useState("");
   const [markers, setMarkers] = useState([]);
   const [viewPort, setViewPort] = useState({
     latitude: 42.4211,
@@ -14,6 +15,15 @@ export default function WorldMap() {
     height: "450px",
     zoom: 0,
   });
+
+  const filteredCountries =
+    countries.length > 0 &&
+    countries.filter((country) => {
+      return country.name
+        .toLowerCase()
+        .includes(filterInputValue.toLowerCase());
+    });
+  console.log(filteredCountries);
 
   useEffect(() => {
     fetch("https://restcountries.eu/rest/v2/all")
@@ -47,16 +57,18 @@ export default function WorldMap() {
   }
 
   function handleOnName(e) {
-    console.log(e.target.value);
-    for (let i = 0; i < countries.length; i++) {
-      if (countries[i].name.toLowerCase() === e.target.value.toLowerCase()) {
-        console.log(countries[i]);
-      }
-    }
+    setFilterInputValue(e.target.value);
+    // console.log(inputValue);
+    // for (let i = 0; i < countries.length; i++) {
+    //   if (countries[i].name.toLowerCase().includes(inputValue.toLowerCase())) {
+    //     console.log(countries[i]);
+    // setCountries(countries[i]);
+    //   }
+    // }
   }
 
   return (
-    <div className="worldMap">
+    <div className="WorldMap">
       <h2>WorldMap</h2>
       <Link to="/">Home</Link>
       <Link to="/myTrips">My Trips</Link>
@@ -84,22 +96,27 @@ export default function WorldMap() {
 
       <div>{textContent}</div>
 
-      <input placeholder="filter" onChange={handleOnName}></input>
+      <input
+        placeholder="filter"
+        value={filterInputValue}
+        onChange={handleOnName}
+      ></input>
 
-      {countries.map((country) => {
-        const { name, latlng } = country;
-        return (
-          <div key={name} className="countryName">
-            <input
-              onClick={(event) => handleClick(event, latlng)}
-              className="checkbox"
-              type="checkbox"
-              value={name}
-            ></input>
-            <span>{name}</span>
-          </div>
-        );
-      })}
+      {filteredCountries &&
+        filteredCountries.map((country) => {
+          const { name, latlng } = country;
+          return (
+            <div key={name} className="countryName">
+              <input
+                onClick={(event) => handleClick(event, latlng)}
+                className="checkbox"
+                type="checkbox"
+                value={name}
+              ></input>
+              <span>{name}</span>
+            </div>
+          );
+        })}
     </div>
   );
 }
