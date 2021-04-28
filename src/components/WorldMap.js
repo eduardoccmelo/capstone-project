@@ -13,6 +13,7 @@ export default function WorldMap() {
   const [visitedCountries, setVisitedCountries] = useState(0);
   const [filterInputValue, setFilterInputValue] = useState("");
   const [markers, setMarkers] = useState([]);
+  // const [checkboxesState, setCheckboxesState] = useState(false);
   const [viewPort, setViewPort] = useState({
     latitude: 42.123,
     longitude: 10.123,
@@ -57,14 +58,14 @@ export default function WorldMap() {
     textContent = `You have visited ${visitedCountries} Countries in the World`;
   }
 
-  function handleClick(e, latlng) {
+  function handleClick(e, latlng, name) {
     if (e.target.checked === true) {
       setVisitedCountries(visitedCountries + 1);
-      setMarkers([...markers, latlng]);
+      setMarkers([...markers, { latlng, name }]);
     } else {
       setVisitedCountries(visitedCountries - 1);
       function filterFunction(country) {
-        return country !== latlng;
+        return country.name !== name;
       }
       const filteredMarkers = markers.filter(filterFunction);
       setMarkers(filteredMarkers);
@@ -73,6 +74,13 @@ export default function WorldMap() {
 
   function handleOnName(e) {
     setFilterInputValue(e.target.value);
+  }
+
+  function getCheckboxState(name) {
+    const isChecked = markers.some((marker) => {
+      return marker.name === name;
+    });
+    return isChecked;
   }
 
   return (
@@ -93,9 +101,9 @@ export default function WorldMap() {
           markers.map((marker) => {
             return (
               <Marker
-                key={`${marker[0]}${marker[1]}`}
-                latitude={marker[0]}
-                longitude={marker[1]}
+                key={marker.name}
+                latitude={marker.latlng[0]}
+                longitude={marker.latlng[1]}
               >
                 <div>
                   <i className="fas fa-check-circle"></i>
@@ -127,13 +135,19 @@ export default function WorldMap() {
           return (
             <div key={name} className="countryName">
               <input
-                onClick={(event) => handleClick(event, latlng)}
+                onChange={(e) => handleClick(e, latlng, name)}
                 className="checkbox"
                 type="checkbox"
                 value={name}
+                checked={getCheckboxState(name)}
+
+                // onChange={(e) => {
+                //   setCheckboxesState(e.target.checked);
+                //   console.log(checkboxesState);
+                // }}
               ></input>
 
-              <span key={name}>{name}</span>
+              <span>{name}</span>
             </div>
           );
         })}

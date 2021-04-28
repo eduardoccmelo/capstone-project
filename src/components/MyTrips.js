@@ -1,15 +1,39 @@
 import "./styles/MyTrips.css";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import {
+  getTripsFromLocalStorage,
+  removeTripFromLocalStorage,
+} from "../services/myTripsStorage";
 
 export default function MyTrips() {
+  const [trips, setTrips] = useState([]);
+  useEffect(() => {
+    const myTrips = getTripsFromLocalStorage();
+    setTrips(myTrips);
+  }, []);
+  function handleRemoveTrip(trip) {
+    removeTripFromLocalStorage(trip);
+    const myTrips = getTripsFromLocalStorage();
+    setTrips(myTrips);
+  }
+  function renderMyTrips() {
+    return trips.map((trip) => {
+      return (
+        <div key={trip.name} className="myTripsList">
+          <button onClick={() => handleRemoveTrip(trip.name)}>x</button>
+          <span>{trip.name}</span>
+          <span>
+            ({trip.start} / {trip.end})
+          </span>
+        </div>
+      );
+    });
+  }
   return (
     <div className="MyTrips">
       <h2>My Trips</h2>
-      <Link to="/myTrips/:id">Trip 1</Link>
-      <Link to="/myTrips/:id">Trip 2</Link>
-      <Link to="/myTrips/:id">Trip 3</Link>
-      <Link to="/myTrips/:id">Trip 4</Link>
-      <Link to="/myTrips/:id">Trip 5</Link>
+      {renderMyTrips()}
       <Link to="/newTrip">Add a New Trip</Link>
       <Link to="/worldMap">World Map</Link>
       <Link to="/">Home</Link>

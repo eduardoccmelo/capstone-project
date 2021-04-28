@@ -1,6 +1,10 @@
 import "./styles/NewTrip.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import {
+  getTripsFromLocalStorage,
+  addTripToLocalStorage,
+} from "../services/myTripsStorage";
 
 export default function NewTrip() {
   const [inputDestinationName, setInputDestinationName] = useState("");
@@ -15,21 +19,28 @@ export default function NewTrip() {
   const [inputCheckoutDate, setInputCheckoutDate] = useState("");
   const [inputCheckoutTime, setInputCheckoutTime] = useState("");
   const [inputSightseeing, setInputSightseeing] = useState("");
+  const [trips, setTrips] = useState([]);
 
   function handleOnSubmit(e) {
     e.preventDefault();
-    console.log(inputDestinationName);
-    console.log(inputTripStart);
-    console.log(inputTripEnd);
-    console.log(inputTransportType);
-    console.log(inputTripDeparture);
-    console.log(inputTripArrival);
-    console.log(inputTripAccommodation);
-    console.log(inputCheckinDate);
-    console.log(inputCheckinTime);
-    console.log(inputCheckoutDate);
-    console.log(inputCheckoutTime);
-    console.log(inputSightseeing);
+
+    addTripToLocalStorage({
+      name: inputDestinationName,
+      start: inputTripStart,
+      end: inputTripEnd,
+      transportation: inputTransportType,
+      departure: inputTripDeparture,
+      arrival: inputTripArrival,
+      accommodation: inputTripAccommodation,
+      checkinDate: inputCheckinDate,
+      checkinTime: inputCheckinTime,
+      checkoutDate: inputCheckoutDate,
+      checkoutTime: inputCheckoutTime,
+      sightseeing: inputSightseeing,
+    });
+
+    const myTrips = getTripsFromLocalStorage();
+    setTrips(myTrips);
   }
 
   return (
@@ -38,7 +49,7 @@ export default function NewTrip() {
       <form className="NewTripForm" onSubmit={handleOnSubmit}>
         <div className="formHeader">
           <label htmlFor="tripName">
-            Name:
+            Destination Name:
             <input
               onChange={(e) => {
                 setInputDestinationName(e.target.value);
@@ -46,6 +57,7 @@ export default function NewTrip() {
               value={inputDestinationName}
               id="tripName"
               type="text"
+              required
             ></input>
           </label>
         </div>
@@ -58,6 +70,7 @@ export default function NewTrip() {
               }}
               id="tripStart"
               type="date"
+              required
             ></input>
           </label>
 
@@ -69,6 +82,7 @@ export default function NewTrip() {
               }}
               id="tripEnd"
               type="date"
+              required
             ></input>
           </label>
         </div>
@@ -171,8 +185,13 @@ export default function NewTrip() {
             ></textarea>
           </label>
         </div>
-
-        <button>Create</button>
+        <button
+          onClick={() => {
+            alert(`Trip to ${inputDestinationName} created`);
+          }}
+        >
+          Create
+        </button>
       </form>
       <Link to="/myTrips">Cancel</Link>
     </div>
