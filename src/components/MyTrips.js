@@ -22,7 +22,9 @@ export default function MyTrips() {
       return (
         <div key={trip.name} className="myTripsList">
           <button onClick={() => handleRemoveTrip(trip.name)}>x</button>
-          <span>{trip.name}</span>
+          <Link to="/myTrips/:id">
+            <span>{trip.name}</span>
+          </Link>
           <span>
             ({trip.start} / {trip.end})
           </span>
