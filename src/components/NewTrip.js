@@ -1,4 +1,5 @@
 import "./styles/NewTrip.css";
+import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import {
@@ -20,6 +21,7 @@ export default function NewTrip() {
   const [inputCheckoutTime, setInputCheckoutTime] = useState("");
   const [inputSightseeing, setInputSightseeing] = useState("");
   const [trips, setTrips] = useState([]);
+  const history = useHistory();
 
   function handleOnSubmit(e) {
     e.preventDefault();
@@ -41,6 +43,8 @@ export default function NewTrip() {
 
     const myTrips = getTripsFromLocalStorage();
     setTrips(myTrips);
+
+    alert(`Trip to ${inputDestinationName} created!`);
   }
 
   return (
@@ -185,13 +189,7 @@ export default function NewTrip() {
             ></textarea>
           </label>
         </div>
-        <button
-          onClick={() => {
-            alert(`Trip to ${inputDestinationName} created`);
-          }}
-        >
-          Create
-        </button>
+        <button onClick={() => history.goBack()}>Create</button>
       </form>
       <Link to="/myTrips">Cancel</Link>
     </div>
