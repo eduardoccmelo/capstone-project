@@ -7,13 +7,18 @@ import ReactMapGl, {
   NavigationControl,
 } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
+import {
+  addMarkerToLocalStorage,
+  getMarkersFromLocalStorage,
+  removeMarkerFromLocalStorage,
+} from "../services/myMarkersStorage";
 
 export default function WorldMap() {
   const [countries, setCountries] = useState([]);
   const [visitedCountries, setVisitedCountries] = useState(0);
   const [filterInputValue, setFilterInputValue] = useState("");
   const [markers, setMarkers] = useState([]);
-  // const [checkboxesState, setCheckboxesState] = useState(false);
+  console.log(markers);
   const [viewPort, setViewPort] = useState({
     latitude: 42.123,
     longitude: 10.123,
@@ -49,6 +54,11 @@ export default function WorldMap() {
       });
   }, []);
 
+  useEffect(() => {
+    const myMarkers = getMarkersFromLocalStorage();
+    setMarkers(myMarkers);
+  }, []);
+
   let textContent;
   if (visitedCountries === 0) {
     textContent = "You didn't select any Country yet";
@@ -62,6 +72,7 @@ export default function WorldMap() {
     if (e.target.checked === true) {
       setVisitedCountries(visitedCountries + 1);
       setMarkers([...markers, { latlng, name }]);
+      addMarkerToLocalStorage({ latlng, name });
     } else {
       setVisitedCountries(visitedCountries - 1);
       function filterFunction(country) {
@@ -69,6 +80,7 @@ export default function WorldMap() {
       }
       const filteredMarkers = markers.filter(filterFunction);
       setMarkers(filteredMarkers);
+      removeMarkerFromLocalStorage(name);
     }
   }
 
@@ -106,7 +118,12 @@ export default function WorldMap() {
                 longitude={marker.latlng[1]}
               >
                 <div>
-                  <i className="fas fa-check-circle"></i>
+                  <i
+                    onClick={() => {
+                      alert(marker.name);
+                    }}
+                    class="fas fa-map-marker-alt"
+                  ></i>
                 </div>
               </Marker>
             );
@@ -140,11 +157,6 @@ export default function WorldMap() {
                 type="checkbox"
                 value={name}
                 checked={getCheckboxState(name)}
-
-                // onChange={(e) => {
-                //   setCheckboxesState(e.target.checked);
-                //   console.log(checkboxesState);
-                // }}
               ></input>
 
               <span>{name}</span>

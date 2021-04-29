@@ -14,3 +14,9 @@ body {
   border: black solid 1px;
   font-size: 16px;
 }
+
+.fa-map-marker-alt {
+  font-size: 1.1em;
+  color: rgb(2, 46, 2);
+  cursor: pointer;
+}
