@@ -2,10 +2,7 @@ import "./styles/NewTrip.css";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import {
-  getTripsFromLocalStorage,
-  addTripToLocalStorage,
-} from "../services/myTripsStorage";
+import { addTripToLocalStorage } from "../services/myTripsStorage";
 
 export default function NewTrip() {
   const [inputDestinationName, setInputDestinationName] = useState("");
@@ -20,7 +17,6 @@ export default function NewTrip() {
   const [inputCheckoutDate, setInputCheckoutDate] = useState("");
   const [inputCheckoutTime, setInputCheckoutTime] = useState("");
   const [inputSightseeing, setInputSightseeing] = useState("");
-  const [trips, setTrips] = useState([]);
   const history = useHistory();
 
   function handleOnSubmit(e) {
@@ -40,10 +36,6 @@ export default function NewTrip() {
       checkoutTime: inputCheckoutTime,
       sightseeing: inputSightseeing,
     });
-
-    const myTrips = getTripsFromLocalStorage();
-    setTrips(myTrips);
-
     alert(`Trip to ${inputDestinationName} created!`);
   }
 
