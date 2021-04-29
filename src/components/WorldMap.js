@@ -12,13 +12,17 @@ import {
   getMarkersFromLocalStorage,
   removeMarkerFromLocalStorage,
 } from "../services/myMarkersStorage";
+import {
+  addCountryCountToLocalStorage,
+  removeCountryCountFromLocalStorage,
+  getCountriesCountFromLocalStorage,
+} from "../services/countriesCount";
 
 export default function WorldMap() {
   const [countries, setCountries] = useState([]);
-  const [visitedCountries, setVisitedCountries] = useState(0);
+  const [numberOfVisitedCountries, setNumberOfVisitedCountries] = useState(0);
   const [filterInputValue, setFilterInputValue] = useState("");
   const [markers, setMarkers] = useState([]);
-  console.log(markers);
   const [viewPort, setViewPort] = useState({
     latitude: 42.123,
     longitude: 10.123,
@@ -57,31 +61,34 @@ export default function WorldMap() {
   useEffect(() => {
     const myMarkers = getMarkersFromLocalStorage();
     setMarkers(myMarkers);
+    setNumberOfVisitedCountries(getCountriesCountFromLocalStorage());
   }, []);
-
-  let textContent;
-  if (visitedCountries === 0) {
-    textContent = "You didn't select any Country yet";
-  } else if (visitedCountries === 1) {
-    textContent = `You have visited ${visitedCountries} Country in the World`;
-  } else {
-    textContent = `You have visited ${visitedCountries} Countries in the World`;
-  }
 
   function handleClick(e, latlng, name) {
     if (e.target.checked === true) {
-      setVisitedCountries(visitedCountries + 1);
+      setNumberOfVisitedCountries(numberOfVisitedCountries + 1);
       setMarkers([...markers, { latlng, name }]);
       addMarkerToLocalStorage({ latlng, name });
+      addCountryCountToLocalStorage();
     } else {
-      setVisitedCountries(visitedCountries - 1);
+      setNumberOfVisitedCountries(numberOfVisitedCountries - 1);
       function filterFunction(country) {
         return country.name !== name;
       }
       const filteredMarkers = markers.filter(filterFunction);
       setMarkers(filteredMarkers);
       removeMarkerFromLocalStorage(name);
+      removeCountryCountFromLocalStorage();
     }
+  }
+
+  let textContent;
+  if (numberOfVisitedCountries === 0) {
+    textContent = "You didn't select any Country yet";
+  } else if (numberOfVisitedCountries === 1) {
+    textContent = `You have visited ${getCountriesCountFromLocalStorage()} Country in the World`;
+  } else {
+    textContent = `You have visited ${getCountriesCountFromLocalStorage()} Countries in the World`;
   }
 
   function handleOnName(e) {
@@ -122,7 +129,7 @@ export default function WorldMap() {
                     onClick={() => {
                       alert(marker.name);
                     }}
-                    class="fas fa-map-marker-alt"
+                    className="fas fa-map-marker-alt"
                   ></i>
                 </div>
               </Marker>
