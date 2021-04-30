@@ -23,6 +23,7 @@ export default function NewTrip() {
     e.preventDefault();
 
     addTripToLocalStorage({
+      id: `${inputDestinationName}${inputTripStart}${inputTripEnd}`,
       name: inputDestinationName,
       start: inputTripStart,
       end: inputTripEnd,
@@ -40,7 +41,7 @@ export default function NewTrip() {
   }
 
   return (
-    <div className="newTripForm">
+    <div className="NewTripForm">
       <h2>New Trip</h2>
       <form className="NewTripForm" onSubmit={handleOnSubmit}>
         <div className="formHeader">
@@ -124,7 +125,7 @@ export default function NewTrip() {
         </div>
         <div className="formAccommodation">
           <label htmlFor="tripAccommodation">
-            Name of the accommodation:
+            Accommodation:
             <input
               onChange={(e) => {
                 setInputTripAccommodation(e.target.value);

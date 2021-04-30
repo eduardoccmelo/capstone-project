@@ -28,9 +28,9 @@ export default function MyTrips() {
   function renderMyTrips() {
     return trips.map((trip) => {
       return (
-        <div key={trip.name} className="myTripsList">
+        <div key={trip.name} className="myTripsItem">
           <button onClick={() => handleRemoveTrip(trip.name)}>x</button>
-          <Link to="/myTrips/:id">
+          <Link to={`/myTrips/${trip.id}`}>
             <span>{trip.name}</span>
           </Link>
           <span>

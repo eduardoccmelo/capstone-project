@@ -25,7 +25,7 @@ export default function WorldMap() {
   const [viewPort, setViewPort] = useState({
     latitude: 42.123,
     longitude: 10.123,
-    width: "520px",
+    width: "375px",
     height: "370px",
     zoom: 0,
   });

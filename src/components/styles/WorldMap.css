@@ -1,11 +1,12 @@
-body {
-  background-color: #66a0b7;
-}
-
 .WorldMap {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.countryName {
+  display: flex;
+  justify-content: flex-start;
 }
 
 .filterInput {

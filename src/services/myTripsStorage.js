@@ -3,6 +3,14 @@ export function getTripsFromLocalStorage() {
   return myTrips;
 }
 
+export function getSingleTripFromLocalStorage(id) {
+  const myTrips = getTripsFromLocalStorage();
+  const singleTrip = myTrips.find((trip) => {
+    return trip.id === id;
+  });
+  return singleTrip;
+}
+
 export function addTripToLocalStorage(tripData) {
   const myTrips = getTripsFromLocalStorage();
   myTrips.push(tripData);
