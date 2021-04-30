@@ -10,13 +10,12 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import {
   addMarkerToLocalStorage,
   getMarkersFromLocalStorage,
-  removeMarkerFromLocalStorage,
 } from "../services/myMarkersStorage";
 import {
   addCountryCountToLocalStorage,
   removeCountryCountFromLocalStorage,
   getCountriesCountFromLocalStorage,
-} from "../services/countriesCount";
+} from "../services/countriesCountStorage";
 
 export default function WorldMap() {
   const [countries, setCountries] = useState([]);
@@ -72,9 +71,7 @@ export default function WorldMap() {
       addCountryCountToLocalStorage();
     } else {
       setNumberOfVisitedCountries(numberOfVisitedCountries - 1);
-      function filterFunction(country) {
-        return country.name !== name;
-      }
+      const filterFunction = (country) => country.name !== name;
       const filteredMarkers = markers.filter(filterFunction);
       setMarkers(filteredMarkers);
       removeMarkerFromLocalStorage(name);
@@ -100,6 +97,14 @@ export default function WorldMap() {
       return marker.name === name;
     });
     return isChecked;
+  }
+
+  function removeMarkerFromLocalStorage(tripName) {
+    const myMarkers = getMarkersFromLocalStorage();
+    const newMarkers = myMarkers.filter((marker) => {
+      return marker.name !== tripName;
+    });
+    localStorage.setItem("markerData", JSON.stringify(newMarkers));
   }
 
   return (

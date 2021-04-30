@@ -8,11 +8,3 @@ export function addTripToLocalStorage(tripData) {
   myTrips.push(tripData);
   localStorage.setItem("tripData", JSON.stringify(myTrips));
 }
-
-export function removeTripFromLocalStorage(tripName) {
-  const myTrips = getTripsFromLocalStorage();
-  const newTrips = myTrips.filter((trip) => {
-    return trip.name !== tripName;
-  });
-  localStorage.setItem("tripData", JSON.stringify(newTrips));
-}

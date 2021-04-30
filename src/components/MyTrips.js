@@ -1,22 +1,30 @@
 import "./styles/MyTrips.css";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import {
-  getTripsFromLocalStorage,
-  removeTripFromLocalStorage,
-} from "../services/myTripsStorage";
+import { getTripsFromLocalStorage } from "../services/myTripsStorage";
 
 export default function MyTrips() {
   const [trips, setTrips] = useState([]);
+
   useEffect(() => {
     const myTrips = getTripsFromLocalStorage();
     setTrips(myTrips);
   }, []);
+
   function handleRemoveTrip(trip) {
     removeTripFromLocalStorage(trip);
     const myTrips = getTripsFromLocalStorage();
     setTrips(myTrips);
   }
+
+  function removeTripFromLocalStorage(tripName) {
+    const myTrips = getTripsFromLocalStorage();
+    const newTrips = myTrips.filter((trip) => {
+      return trip.name !== tripName;
+    });
+    localStorage.setItem("tripData", JSON.stringify(newTrips));
+  }
+
   function renderMyTrips() {
     return trips.map((trip) => {
       return (
