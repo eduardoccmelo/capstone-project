@@ -7,10 +7,19 @@ import ReactMapGl, {
   NavigationControl,
 } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
+import {
+  addMarkerToLocalStorage,
+  getMarkersFromLocalStorage,
+} from "../services/myMarkersStorage";
+import {
+  addCountryCountToLocalStorage,
+  removeCountryCountFromLocalStorage,
+  getCountriesCountFromLocalStorage,
+} from "../services/countriesCountStorage";
 
 export default function WorldMap() {
   const [countries, setCountries] = useState([]);
-  const [visitedCountries, setVisitedCountries] = useState(0);
+  const [numberOfVisitedCountries, setNumberOfVisitedCountries] = useState(0);
   const [filterInputValue, setFilterInputValue] = useState("");
   const [markers, setMarkers] = useState([]);
   const [viewPort, setViewPort] = useState({
@@ -48,31 +57,54 @@ export default function WorldMap() {
       });
   }, []);
 
-  let textContent;
-  if (visitedCountries === 0) {
-    textContent = "You didn't select any Country yet";
-  } else if (visitedCountries === 1) {
-    textContent = `You have visited ${visitedCountries} Country in the World`;
-  } else {
-    textContent = `You have visited ${visitedCountries} Countries in the World`;
-  }
+  useEffect(() => {
+    const myMarkers = getMarkersFromLocalStorage();
+    setMarkers(myMarkers);
+    setNumberOfVisitedCountries(getCountriesCountFromLocalStorage());
+  }, []);
 
-  function handleClick(e, latlng) {
+  function handleClick(e, latlng, name) {
     if (e.target.checked === true) {
-      setVisitedCountries(visitedCountries + 1);
-      setMarkers([...markers, latlng]);
+      setNumberOfVisitedCountries(numberOfVisitedCountries + 1);
+      setMarkers([...markers, { latlng, name }]);
+      addMarkerToLocalStorage({ latlng, name });
+      addCountryCountToLocalStorage();
     } else {
-      setVisitedCountries(visitedCountries - 1);
-      function filterFunction(country) {
-        return country !== latlng;
-      }
+      setNumberOfVisitedCountries(numberOfVisitedCountries - 1);
+      const filterFunction = (country) => country.name !== name;
       const filteredMarkers = markers.filter(filterFunction);
       setMarkers(filteredMarkers);
+      removeMarkerFromLocalStorage(name);
+      removeCountryCountFromLocalStorage();
     }
+  }
+
+  let textContent;
+  if (numberOfVisitedCountries === 0) {
+    textContent = "You didn't select any Country yet";
+  } else if (numberOfVisitedCountries === 1) {
+    textContent = `You have visited ${getCountriesCountFromLocalStorage()} Country in the World`;
+  } else {
+    textContent = `You have visited ${getCountriesCountFromLocalStorage()} Countries in the World`;
   }
 
   function handleOnName(e) {
     setFilterInputValue(e.target.value);
+  }
+
+  function getCheckboxState(name) {
+    const isChecked = markers.some((marker) => {
+      return marker.name === name;
+    });
+    return isChecked;
+  }
+
+  function removeMarkerFromLocalStorage(tripName) {
+    const myMarkers = getMarkersFromLocalStorage();
+    const newMarkers = myMarkers.filter((marker) => {
+      return marker.name !== tripName;
+    });
+    localStorage.setItem("markerData", JSON.stringify(newMarkers));
   }
 
   return (
@@ -93,12 +125,17 @@ export default function WorldMap() {
           markers.map((marker) => {
             return (
               <Marker
-                key={`${marker[0]}${marker[1]}`}
-                latitude={marker[0]}
-                longitude={marker[1]}
+                key={marker.name}
+                latitude={marker.latlng[0]}
+                longitude={marker.latlng[1]}
               >
                 <div>
-                  <i className="fas fa-check-circle"></i>
+                  <i
+                    onClick={() => {
+                      alert(marker.name);
+                    }}
+                    className="fas fa-map-marker-alt"
+                  ></i>
                 </div>
               </Marker>
             );
@@ -127,13 +164,14 @@ export default function WorldMap() {
           return (
             <div key={name} className="countryName">
               <input
-                onClick={(event) => handleClick(event, latlng)}
+                onChange={(e) => handleClick(e, latlng, name)}
                 className="checkbox"
                 type="checkbox"
                 value={name}
+                checked={getCheckboxState(name)}
               ></input>
 
-              <span key={name}>{name}</span>
+              <span>{name}</span>
             </div>
           );
         })}
