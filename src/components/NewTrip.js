@@ -38,6 +38,7 @@ export default function NewTrip() {
       sightseeing: inputSightseeing,
     });
     alert(`Trip to ${inputDestinationName} created!`);
+    history.push("/myTrips");
   }
 
   return (
@@ -182,7 +183,7 @@ export default function NewTrip() {
             ></textarea>
           </label>
         </div>
-        <button onClick={() => history.goBack()}>Create</button>
+        <button>Create</button>
       </form>
       <Link to="/myTrips">Cancel</Link>
     </div>

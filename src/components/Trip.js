@@ -19,7 +19,7 @@ export default function Trip() {
       <h2>Trip Details</h2>
       <p>ID: {singleTrip.id}</p>
       <p>NAME: {singleTrip.name}</p>
-      <Link to="/myTrips/:id/edit">Edit</Link>
+      <Link to={`/myTrips/${singleTrip.id}/edit`}>Edit</Link>
       <button onClick={() => history.goBack()}>Back</button>
     </div>
   );
