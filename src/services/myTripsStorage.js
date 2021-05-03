@@ -17,15 +17,14 @@ export function addTripToLocalStorage(tripData) {
   localStorage.setItem("tripData", JSON.stringify(myTrips));
 }
 
-export function editSingleTripFromLocalStorage(id, editedTrip) {
+export function editSingleTripFromLocalStorage(id, updatedTrip) {
   const myTrips = getTripsFromLocalStorage();
-  const singleTrip = myTrips.find((trip) => {
-    return trip.id === id;
+  const updatedTrips = myTrips.map((trip) => {
+    if (trip.id === id) {
+      return { ...trip, ...updatedTrip };
+    } else {
+      return trip;
+    }
   });
-  return singleTrip;
+  localStorage.setItem("tripData", JSON.stringify(updatedTrips));
 }
-
-// export function editSingleTripToLocalStorage(id) {
-//   const myTrip = getSingleTripFromLocalStorage(id);
-//   localStorage.setItem("tripData", JSON.stringify(myTrip));
-// }

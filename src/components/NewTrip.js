@@ -23,7 +23,7 @@ export default function NewTrip() {
     e.preventDefault();
 
     addTripToLocalStorage({
-      id: `${inputDestinationName}${inputTripStart}${inputTripEnd}`,
+      id: `${inputTripStart}${inputTripEnd}`,
       name: inputDestinationName,
       start: inputTripStart,
       end: inputTripEnd,

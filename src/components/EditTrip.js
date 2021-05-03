@@ -1,7 +1,10 @@
 import "./styles/EditTrip.css";
 import { useHistory, useParams } from "react-router";
 import { Link } from "react-router-dom";
-import { getSingleTripFromLocalStorage } from "../services/myTripsStorage";
+import {
+  getSingleTripFromLocalStorage,
+  editSingleTripFromLocalStorage,
+} from "../services/myTripsStorage";
 import { useState, useEffect } from "react";
 
 export default function EditTrip() {
@@ -24,8 +27,7 @@ export default function EditTrip() {
   function handleOnSubmit(e) {
     e.preventDefault();
 
-    let updatedTrip = {
-      id: `${inputDestinationName}${inputTripStart}${inputTripEnd}`,
+    editSingleTripFromLocalStorage(id, {
       name: inputDestinationName,
       start: inputTripStart,
       end: inputTripEnd,
@@ -38,11 +40,9 @@ export default function EditTrip() {
       checkoutDate: inputCheckoutDate,
       checkoutTime: inputCheckoutTime,
       sightseeing: inputSightseeing,
-    };
+    });
     alert(`Trip to ${inputDestinationName} edited!`);
     history.push("/myTrips");
-    console.log(updatedTrip);
-    // localStorage.setItem("tripData", JSON.stringify(updatedTrip));
   }
 
   useEffect(() => {
