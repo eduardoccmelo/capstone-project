@@ -28,9 +28,9 @@ export default function MyTrips() {
   function renderMyTrips() {
     return trips.map((trip) => {
       return (
-        <div key={trip.name} className="myTripsList">
+        <div key={trip.name} className="myTripsItem">
           <button onClick={() => handleRemoveTrip(trip.name)}>x</button>
-          <Link to="/myTrips/:id">
+          <Link to={`/myTrips/${trip.id}`}>
             <span>{trip.name}</span>
           </Link>
           <span>
@@ -43,6 +43,7 @@ export default function MyTrips() {
   return (
     <div className="MyTrips">
       <h2>My Trips</h2>
+      {trips.length < 1 && <p>You don't have any trips yet</p>}
       {renderMyTrips()}
       <Link to="/newTrip">Add a New Trip</Link>
       <Link to="/worldMap">World Map</Link>
