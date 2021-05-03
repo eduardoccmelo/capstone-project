@@ -3,3 +3,15 @@
   flex-direction: column;
   align-items: center;
 }
+
+.homeLinks {
+  margin-left: 5px;
+  margin-right: 5px;
+  border: solid 1px black;
+  text-decoration: none;
+  padding: 5px;
+  background-color: teal;
+  color: black;
+  border-radius: 10px;
+  margin: 5px;
+}

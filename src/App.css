@@ -7,7 +7,10 @@
 }
 
 body {
-  background-color: #66a0b7;
+  background-image: url("https://images.unsplash.com/photo-1540808044900-586280dec621?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: top;
 }
 
 .App {
@@ -15,12 +18,19 @@ body {
   height: 100vh;
   grid-template-rows: [header] 50px [main] auto;
   margin: auto;
+  font-family: Roboto;
 }
 
 .header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: teal;
+  background-color: rgba(0, 0, 0, 0.2);
   justify-content: center;
+  transform: rotate(22deg);
+  position: absolute;
+  width: 500px;
+  height: 95px;
+  right: -200px;
+  top: -21px;
 }
