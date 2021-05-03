@@ -43,6 +43,7 @@ export default function MyTrips() {
   return (
     <div className="MyTrips">
       <h2>My Trips</h2>
+      {trips.length < 1 && <p>You don't have any trips yet</p>}
       {renderMyTrips()}
       <Link to="/newTrip">Add a New Trip</Link>
       <Link to="/worldMap">World Map</Link>
