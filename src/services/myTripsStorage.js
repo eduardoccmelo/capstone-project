@@ -17,7 +17,7 @@ export function addTripToLocalStorage(tripData) {
   localStorage.setItem("tripData", JSON.stringify(myTrips));
 }
 
-export function editSingleTripFromLocalStorage(id) {
+export function editSingleTripFromLocalStorage(id, editedTrip) {
   const myTrips = getTripsFromLocalStorage();
   const singleTrip = myTrips.find((trip) => {
     return trip.id === id;
