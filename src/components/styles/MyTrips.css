@@ -228,7 +228,7 @@ hr {
   }
   .myTripsItem {
     border: 2px solid black;
-    width: 200px;
+    width: 220px;
     height: 100px;
     margin: 5px;
     padding: 5px;
@@ -241,12 +241,12 @@ hr {
     position: relative;
   }
   .tripName {
-    margin-left: 10px;
+    margin-left: 0;
     margin-right: 80px;
     text-transform: uppercase;
     text-decoration: none;
     color: black;
-    font-size: 12px;
+    font-size: 10px;
   }
   .tripDates {
     right: 32px;
@@ -280,7 +280,8 @@ hr {
     width: 300px;
   }
   .tripName {
-    font-size: 20px;
+    font-size: 16px;
+    margin-left: 10px;
   }
   .transportTypeIcon {
     display: inline;
@@ -301,7 +302,16 @@ hr {
     font-size: 24px;
   }
   .myTripsItem {
-    width: 340px;
+    width: 330px;
+  }
+  .tripName {
+    font-size: 20px;
+  }
+  .tripViewButton {
+    width: 50px;
+    font-size: 15px;
+    right: 26px;
+    font-weight: 500;
   }
 }
 
@@ -318,5 +328,8 @@ hr {
   }
   .myTripsItem {
     width: 420px;
+  }
+  .tripName {
+    font-size: 24px;
   }
 }

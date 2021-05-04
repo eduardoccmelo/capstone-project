@@ -45,12 +45,15 @@ export default function NewTrip() {
   }
 
   return (
-    <div className="NewTripForm">
-      <h2>New Trip</h2>
+    <div className="NewTrip">
+      <div className="newTripHeader">
+        <h2>NEW TRIP</h2>
+      </div>
+
       <form className="NewTripForm" onSubmit={handleOnSubmit}>
         <div className="formHeader">
-          <label htmlFor="tripName">
-            Destination Name:
+          <label className="tripNameForm" htmlFor="tripName">
+            Destination Name
             <input
               onChange={(e) => {
                 setInputDestinationName(e.target.value);
@@ -58,13 +61,15 @@ export default function NewTrip() {
               value={inputDestinationName}
               id="tripName"
               type="text"
+              placeholder="Type your destination"
+              maxLength="10"
               required
             ></input>
           </label>
         </div>
         <div className="formTravelDates">
-          <label htmlFor="tripStart">
-            Start:
+          <label className="tripStartForm" htmlFor="tripStart">
+            START
             <input
               onChange={(e) => {
                 setInputTripStart(e.target.value);
@@ -75,8 +80,8 @@ export default function NewTrip() {
             ></input>
           </label>
 
-          <label htmlFor="tripEnd">
-            End:
+          <label className="tripEndForm" htmlFor="tripEnd">
+            END
             <input
               onChange={(e) => {
                 setInputTripEnd(e.target.value);
@@ -88,15 +93,15 @@ export default function NewTrip() {
           </label>
         </div>
         <div className="formTransport">
-          <label htmlFor="tripTransportType">
-            Transport:
+          <label className="tripTransportForm" htmlFor="tripTransportType">
+            TRANSPORT
             <select
               onChange={(e) => {
                 setInputTransportType(e.target.value);
               }}
               id="tripTransportType"
             >
-              <option value="none">----</option>
+              <option value="none">Transport Type</option>
               <option value="bus">Bus</option>
               <option value="car">Car</option>
               <option value="plane">Plane</option>
@@ -105,90 +110,103 @@ export default function NewTrip() {
             </select>
           </label>
 
-          <label htmlFor="tripDeparture">
-            Departuring Time:
-            <input
-              onChange={(e) => {
-                setInputTripDeparture(e.target.value);
-              }}
-              id="tripDeparture"
-              type="time"
-            ></input>
-          </label>
+          <div className="departureArrival">
+            <label className="inputTranportTimeForm" htmlFor="tripDeparture">
+              DEPARTURE TIME
+              <input
+                onChange={(e) => {
+                  setInputTripDeparture(e.target.value);
+                }}
+                id="tripDeparture"
+                type="time"
+              ></input>
+            </label>
 
-          <label htmlFor="tripArrival">
-            Arriving Time:
-            <input
-              onChange={(e) => {
-                setInputTripArrival(e.target.value);
-              }}
-              id="tripArrival"
-              type="time"
-            ></input>
-          </label>
+            <label className="inputTranportTimeForm" htmlFor="tripArrival">
+              ARRIVAL TIME
+              <input
+                onChange={(e) => {
+                  setInputTripArrival(e.target.value);
+                }}
+                id="tripArrival"
+                type="time"
+              ></input>
+            </label>
+          </div>
         </div>
         <div className="formAccommodation">
-          <label htmlFor="tripAccommodation">
-            Accommodation:
+          <label
+            className="inputAccommodationFormName"
+            htmlFor="tripAccommodation"
+          >
+            ACCOMMODATION
             <input
               onChange={(e) => {
                 setInputTripAccommodation(e.target.value);
               }}
               id="tripAccommodation"
+              placeholder="Type your accommodation"
               type="text"
             ></input>
           </label>
+          <div className="checkinCheckout">
+            <label className="inputAccommodationForm" htmlFor="tripCheckin">
+              CHECK-IN
+              <input
+                onChange={(e) => {
+                  setInputCheckinDate(e.target.value);
+                }}
+                id="tripCheckinDate"
+                type="date"
+              ></input>
+              <input
+                onChange={(e) => {
+                  setInputCheckinTime(e.target.value);
+                }}
+                id="tripCheckinTime"
+                type="time"
+              ></input>
+            </label>
 
-          <label htmlFor="tripCheckin">
-            Check-in:
-            <input
-              onChange={(e) => {
-                setInputCheckinDate(e.target.value);
-              }}
-              id="tripCheckinDate"
-              type="date"
-            ></input>
-            <input
-              onChange={(e) => {
-                setInputCheckinTime(e.target.value);
-              }}
-              id="tripCheckinTime"
-              type="time"
-            ></input>
-          </label>
-
-          <label htmlFor="tripCheckout">
-            Check-out:
-            <input
-              onChange={(e) => {
-                setInputCheckoutDate(e.target.value);
-              }}
-              id="tripCheckoutDate"
-              type="date"
-            ></input>
-            <input
-              onChange={(e) => {
-                setInputCheckoutTime(e.target.value);
-              }}
-              id="tripCheckoutTime"
-              type="time"
-            ></input>
-          </label>
+            <label className="inputAccommodationForm" htmlFor="tripCheckout">
+              CHECK-OUT
+              <input
+                onChange={(e) => {
+                  setInputCheckoutDate(e.target.value);
+                }}
+                id="tripCheckoutDate"
+                type="date"
+              ></input>
+              <input
+                onChange={(e) => {
+                  setInputCheckoutTime(e.target.value);
+                }}
+                id="tripCheckoutTime"
+                type="time"
+              ></input>
+            </label>
+          </div>
         </div>
         <div className="formSightseeing">
-          <label htmlFor="sightseeingList">
-            Sightseeing:
+          <label className="inputSightseeingForm" htmlFor="sightseeingList">
             <textarea
               onChange={(e) => {
                 setInputSightseeing(e.target.value);
               }}
               id="sightseeingList"
+              placeholder="Type your travel notes here..."
             ></textarea>
           </label>
         </div>
-        <button>Create</button>
+        <div className="newTripFormFooter">
+          <button type="submit" className="createNewTripButton">
+            Create
+          </button>
+          <Link className="cancelNewTrip" to="/myTrips">
+            <button className="cancelNewTripButton">Cancel</button>
+          </Link>
+        </div>
       </form>
-      <Link to="/myTrips">Cancel</Link>
     </div>
   );
 }
