@@ -160,6 +160,7 @@ export default function NewTrip() {
                 type="date"
               ></input>
               <input
+                className="accommodationTime"
                 onChange={(e) => {
                   setInputCheckinTime(e.target.value);
                 }}
@@ -178,6 +179,7 @@ export default function NewTrip() {
                 type="date"
               ></input>
               <input
+                className="accommodationTime"
                 onChange={(e) => {
                   setInputCheckoutTime(e.target.value);
                 }}
