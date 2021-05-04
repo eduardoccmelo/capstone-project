@@ -125,7 +125,7 @@ export default function MyTrips() {
           <i className="fas fa-home"></i>
         </Link>
         <Link to="/worldMap" className="myTripsButtonWorldMap">
-          <i className="fas fa-globe-africa"></i> World Map
+          <i className="fas fa-globe-africa"></i> Travel Map
         </Link>
       </div>
     </div>
