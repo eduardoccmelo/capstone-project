@@ -155,7 +155,7 @@
 
 .myTripsFooter {
   display: flex;
-  margin: 10px auto;
+  margin: 20px auto;
   position: absolute;
   bottom: 0;
   position: fixed;
@@ -177,7 +177,7 @@
 }
 
 .myTripsMain {
-  margin-bottom: 70px;
+  margin-bottom: 80px;
 }
 
 .fa-trash-alt {
