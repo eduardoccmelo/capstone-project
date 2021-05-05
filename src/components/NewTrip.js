@@ -40,7 +40,6 @@ export default function NewTrip() {
       checkoutTime: inputCheckoutTime,
       sightseeing: inputSightseeing,
     });
-    alert(`Trip to ${inputDestinationName} created!`);
     history.push("/myTrips");
   }
 

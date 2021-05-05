@@ -41,7 +41,6 @@ export default function EditTrip() {
       checkoutTime: inputCheckoutTime,
       sightseeing: inputSightseeing,
     });
-    alert(`Trip to ${inputDestinationName} edited!`);
     history.push("/myTrips");
   }
 
