@@ -43,6 +43,7 @@ export default function WorldMap() {
     fetch("https://restcountries.eu/rest/v2/all")
       .then((res) => res.json())
       .then((data) => {
+        data.splice(33, 1);
         setCountries(data);
       });
   }, []);
