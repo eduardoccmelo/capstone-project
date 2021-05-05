@@ -8,7 +8,7 @@ export default function Home() {
       <div className="homePageContent">
         <Link className="homeLink1" to="/myTrips">
           <div className="homePageLinksTitles">
-            <span className="myTravelsHome"></span>MY TRAVELS
+            <span className="myTravelsHome"></span>MY TRIPS
           </div>
         </Link>
         <Link className="homeLink2" to="/worldMap">
