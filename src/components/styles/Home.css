@@ -30,12 +30,12 @@
 .myTravelsHome {
   border-radius: 10%;
   animation: zoominoutsinglefeatured 1s infinite;
-  box-shadow: -20px -20px 50px 2px #000 inset, 0 0 20px 2px #000;
+  box-shadow: -10px -10px 20px 1px #000 inset, 0 0 10px 2px #000;
   background-size: cover;
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   margin-bottom: -140px;
-  background-image: url("https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1233&q=80");
+  background-image: url("/src/images/plane.jpg");
   display: flex;
   align-items: center;
   justify-content: center;
@@ -44,10 +44,10 @@
 .earth {
   border-radius: 50%;
   animation: spin 30s linear alternate infinite;
-  box-shadow: -20px -20px 50px 2px #000 inset, 0 0 20px 2px #000;
+  box-shadow: -10px -10px 20px 1px #000 inset, 0 0 10px 2px #000;
   background-size: cover;
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   background-image: url("/src/images/earth.png");
   display: flex;
   align-items: center;
@@ -60,7 +60,8 @@
   scale: 105%;
 }
 
-.homeLinks {
+.homeLink1,
+.homeLink2 {
   text-decoration: none;
   align-content: center;
   align-items: center;
@@ -68,13 +69,19 @@
   flex-direction: column;
 }
 
+.homeLink1 {
+  margin-bottom: -60px;
+}
+
 .homePageLinksTitles {
-  font-size: 1.9em;
+  font-size: 1em;
+  font-weight: 700;
   margin-bottom: 15px;
   margin-top: 5px;
   background-color: rgba(37, 57, 73, 0.95);
   color: white;
-  width: 300px;
+  width: 150px;
+  padding: 5px;
   text-align: center;
   border-radius: 50px;
   border: solid 2px rgb(255, 255, 255);
