@@ -16,11 +16,34 @@ export default function Trip() {
 
   return (
     <div className="TripDetails">
-      <h2>Trip Details</h2>
-      <p>ID: {singleTrip.id}</p>
-      <p>NAME: {singleTrip.name}</p>
-      <Link to={`/myTrips/${singleTrip.id}/edit`}>Edit</Link>
-      <button onClick={() => history.goBack()}>Back</button>
+      <div className="tripDetailsHeader">
+        <h2>TRIP DETAILS</h2>
+      </div>
+      <div className="tripDetailsContent">
+        <p>NAME: {singleTrip.name}</p>
+        <p>START: {singleTrip.start}</p>
+        <p>END: {singleTrip.end}</p>
+        <p>TRANSPORT: {singleTrip.transportation}</p>
+        <p>DEPARTURE: {singleTrip.departure}</p>
+        <p>ARRIVAL: {singleTrip.arrival}</p>
+        <p>ACCOMMODATION: {singleTrip.accommodation}</p>
+        <p>CHECK-IN DATE: {singleTrip.checkinDate}</p>
+        <p>CHECK-IN TIME: {singleTrip.checkinTime}</p>
+        <p>CHECK-OUT DATE: {singleTrip.checkoutDate}</p>
+        <p>CHECK-OUT TIME: {singleTrip.checkoutTime}</p>
+        <p>NOTES: {singleTrip.sightseeing}</p>
+      </div>
+      <div className="tripDetailsFooter">
+        <Link className="editLink" to={`/myTrips/${singleTrip.id}/edit`}>
+          <button className="editTripButton">Edit</button>
+        </Link>
+        <button
+          className="editTripCancelButton"
+          onClick={() => history.goBack()}
+        >
+          Back
+        </button>
+      </div>
     </div>
   );
 }

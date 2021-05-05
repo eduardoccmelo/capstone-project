@@ -169,6 +169,11 @@
   background-color: rgb(85, 31, 31);
 }
 
+.cancelNewTrip:hover,
+.createNewTripButton:hover {
+  scale: 105%;
+}
+
 @media only screen and (max-width: 350px) {
   .formHeader,
   .formTravelDates,
@@ -183,7 +188,7 @@
     margin: 0;
   }
   .inputSightseeingForm textarea {
-    width: 230px;
+    width: 260px;
   }
   .inputAccommodationFormName {
     flex-direction: column;

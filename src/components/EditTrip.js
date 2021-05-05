@@ -62,12 +62,15 @@ export default function EditTrip() {
   }, [id]);
 
   return (
-    <div className="NewTripForm">
-      <h2>Edit Trip</h2>
-      <form className="NewTripForm" onSubmit={handleOnSubmit}>
+    <div className="EditTrip">
+      <div className="editTripHeader">
+        <h2>EDIT TRIP</h2>
+      </div>
+
+      <form className="EditTripForm" onSubmit={handleOnSubmit}>
         <div className="formHeader">
-          <label htmlFor="tripName">
-            Destination Name:
+          <label className="tripNameForm" htmlFor="tripName">
+            Destination Name
             <input
               onChange={(e) => {
                 setInputDestinationName(e.target.value);
@@ -75,13 +78,15 @@ export default function EditTrip() {
               value={inputDestinationName}
               id="tripName"
               type="text"
+              placeholder="Type your destination"
+              maxLength="10"
               required
             ></input>
           </label>
         </div>
         <div className="formTravelDates">
-          <label htmlFor="tripStart">
-            Start:
+          <label className="tripStartForm" htmlFor="tripStart">
+            START
             <input
               onChange={(e) => {
                 setInputTripStart(e.target.value);
@@ -93,8 +98,8 @@ export default function EditTrip() {
             ></input>
           </label>
 
-          <label htmlFor="tripEnd">
-            End:
+          <label className="tripEndForm" htmlFor="tripEnd">
+            END
             <input
               onChange={(e) => {
                 setInputTripEnd(e.target.value);
@@ -107,8 +112,8 @@ export default function EditTrip() {
           </label>
         </div>
         <div className="formTransport">
-          <label htmlFor="tripTransportType">
-            Transport:
+          <label className="tripTransportForm" htmlFor="tripTransportType">
+            TRANSPORT
             <select
               onChange={(e) => {
                 setInputTransportType(e.target.value);
@@ -116,7 +121,7 @@ export default function EditTrip() {
               value={inputTransportType}
               id="tripTransportType"
             >
-              <option value="none">----</option>
+              <option value="none">Transport Type</option>
               <option value="bus">Bus</option>
               <option value="car">Car</option>
               <option value="plane">Plane</option>
@@ -124,99 +129,113 @@ export default function EditTrip() {
               <option value="other">Other</option>
             </select>
           </label>
+          <div className="departureArrival">
+            <label className="inputTranportTimeForm" htmlFor="tripDeparture">
+              DEPARTURE TIME
+              <input
+                onChange={(e) => {
+                  setInputTripDeparture(e.target.value);
+                }}
+                value={inputTripDeparture}
+                id="tripDeparture"
+                type="time"
+              ></input>
+            </label>
 
-          <label htmlFor="tripDeparture">
-            Departuring Time:
-            <input
-              onChange={(e) => {
-                setInputTripDeparture(e.target.value);
-              }}
-              value={inputTripDeparture}
-              id="tripDeparture"
-              type="time"
-            ></input>
-          </label>
-
-          <label htmlFor="tripArrival">
-            Arriving Time:
-            <input
-              onChange={(e) => {
-                setInputTripArrival(e.target.value);
-              }}
-              value={inputTripArrival}
-              id="tripArrival"
-              type="time"
-            ></input>
-          </label>
+            <label className="inputTranportTimeForm" htmlFor="tripArrival">
+              ARRIVAL TIME
+              <input
+                onChange={(e) => {
+                  setInputTripArrival(e.target.value);
+                }}
+                value={inputTripArrival}
+                id="tripArrival"
+                type="time"
+              ></input>
+            </label>
+          </div>
         </div>
         <div className="formAccommodation">
-          <label htmlFor="tripAccommodation">
-            Accommodation:
+          <label
+            className="inputAccommodationFormName"
+            htmlFor="tripAccommodation"
+          >
+            ACCOMMODATION
             <input
               onChange={(e) => {
                 setInputTripAccommodation(e.target.value);
               }}
               value={inputTripAccommodation}
               id="tripAccommodation"
+              placeholder="Type your accommodation"
               type="text"
             ></input>
           </label>
+          <div className="checkinCheckout">
+            <label className="inputAccommodationForm" htmlFor="tripCheckin">
+              CHECK-IN
+              <input
+                onChange={(e) => {
+                  setInputCheckinDate(e.target.value);
+                }}
+                value={inputCheckinDate}
+                id="tripCheckinDate"
+                type="date"
+              ></input>
+              <input
+                className="accommodationTime"
+                onChange={(e) => {
+                  setInputCheckinTime(e.target.value);
+                }}
+                value={inputCheckinTime}
+                id="tripCheckinTime"
+                type="time"
+              ></input>
+            </label>
 
-          <label htmlFor="tripCheckin">
-            Check-in:
-            <input
-              onChange={(e) => {
-                setInputCheckinDate(e.target.value);
-              }}
-              value={inputCheckinDate}
-              id="tripCheckinDate"
-              type="date"
-            ></input>
-            <input
-              onChange={(e) => {
-                setInputCheckinTime(e.target.value);
-              }}
-              value={inputCheckinTime}
-              id="tripCheckinTime"
-              type="time"
-            ></input>
-          </label>
-
-          <label htmlFor="tripCheckout">
-            Check-out:
-            <input
-              onChange={(e) => {
-                setInputCheckoutDate(e.target.value);
-              }}
-              value={inputCheckoutDate}
-              id="tripCheckoutDate"
-              type="date"
-            ></input>
-            <input
-              onChange={(e) => {
-                setInputCheckoutTime(e.target.value);
-              }}
-              value={inputCheckinTime}
-              id="tripCheckoutTime"
-              type="time"
-            ></input>
-          </label>
+            <label className="inputAccommodationForm" htmlFor="tripCheckout">
+              CHECK-OUT
+              <input
+                onChange={(e) => {
+                  setInputCheckoutDate(e.target.value);
+                }}
+                value={inputCheckoutDate}
+                id="tripCheckoutDate"
+                type="date"
+              ></input>
+              <input
+                className="accommodationTime"
+                onChange={(e) => {
+                  setInputCheckoutTime(e.target.value);
+                }}
+                value={inputCheckinTime}
+                id="tripCheckoutTime"
+                type="time"
+              ></input>
+            </label>
+          </div>
         </div>
         <div className="formSightseeing">
-          <label htmlFor="sightseeingList">
-            Sightseeing:
+          <label className="inputSightseeingForm" htmlFor="sightseeingList">
             <textarea
               onChange={(e) => {
                 setInputSightseeing(e.target.value);
               }}
               value={inputSightseeing}
               id="sightseeingList"
+              placeholder="Type your travel notes here..."
             ></textarea>
           </label>
         </div>
-        <button>Edit</button>
+        <div className="editTripFooter">
+          <button className="editFromTripButton" type="submit">
+            Confirm
+          </button>
+          <Link className="cancelTrip" to="/myTrips">
+            <button className="editTripCancelButton">Cancel</button>
+          </Link>
+        </div>
       </form>
-      <Link to="/myTrips">Cancel</Link>
     </div>
   );
 }

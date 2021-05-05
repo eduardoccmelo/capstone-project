@@ -1,17 +1,101 @@
-.Home {
+.homePageContent {
+  margin: 10px;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  /* background-color: rgba(255, 255, 255, 0.125);
+  border: 1px solid black; */
+}
+
+.homePageHeader {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: rgba(37, 57, 73, 1);
+  color: white;
+  justify-content: center;
+  position: absolute;
+  width: 100%;
+  height: 80px;
+  top: 0;
+  right: 0;
+  z-index: 2;
+}
+
+.myTravelsHome {
+  border-radius: 10%;
+  animation: zoominoutsinglefeatured 1s infinite;
+  box-shadow: -20px -20px 50px 2px #000 inset, 0 0 20px 2px #000;
+  background-size: cover;
+  width: 200px;
+  height: 200px;
+  margin-bottom: -140px;
+  background-image: url("https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1233&q=80");
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.earth {
+  border-radius: 50%;
+  animation: spin 30s linear alternate infinite;
+  box-shadow: -20px -20px 50px 2px #000 inset, 0 0 20px 2px #000;
+  background-size: cover;
+  width: 200px;
+  height: 200px;
+  background-image: url("/src/images/earth.png");
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: -65px;
+}
+
+.myTravelsHome:hover,
+.earth:hover {
+  scale: 105%;
 }
 
 .homeLinks {
-  margin-left: 5px;
-  margin-right: 5px;
-  border: solid 1px black;
   text-decoration: none;
-  padding: 5px;
-  background-color: teal;
-  color: black;
-  border-radius: 10px;
-  margin: 5px;
+  align-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.homePageLinksTitles {
+  font-size: 1.9em;
+  margin-bottom: 15px;
+  margin-top: 5px;
+  background-color: rgba(37, 57, 73, 0.95);
+  color: white;
+  width: 300px;
+  text-align: center;
+  border-radius: 50px;
+  border: solid 2px rgb(255, 255, 255);
+  box-shadow: 2px 2px 5px #181212;
+  z-index: 1;
+}
+
+@keyframes zoominoutsinglefeatured {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.02, 1.02);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+@keyframes spin {
+  100% {
+    background-position: 100%;
+  }
 }
