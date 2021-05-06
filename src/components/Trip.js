@@ -7,7 +7,6 @@ import { useState, useEffect } from "react";
 export default function Trip() {
   const history = useHistory();
   const [singleTrip, setSingleTrip] = useState({});
-  const [tripPicture, setTripPicture] = useState();
   const { id } = useParams();
 
   useEffect(() => {
@@ -15,23 +14,10 @@ export default function Trip() {
     setSingleTrip(myTrip);
   }, [id]);
 
-  useEffect(() => {
-    fetch(
-      `https://api.unsplash.com/search/photos?query=${singleTrip.name}&client_id=M1J8_Zg2UMg8H0UFhJ6zCRXN3liI2p-gu1wR45JZ-xU`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setTripPicture(data.results[1].urls.small);
-      });
-  }, [singleTrip]);
-
   return (
     <div className="TripDetails">
       <div className="tripDetailsHeader">
         <h2>TRIP DETAILS</h2>
-      </div>
-      <div className="tripImage">
-        <img alt={singleTrip.name} src={tripPicture} />
       </div>
       <div className="tripDetailsContent">
         <div>

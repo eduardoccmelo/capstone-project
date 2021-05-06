@@ -41,20 +41,6 @@
   align-items: center;
   font-size: 0.9em;
 }
-.tripImage {
-  display: flex;
-  align-self: center;
-}
-.tripImage img {
-  width: 350px;
-  height: 250px;
-  object-fit: cover;
-  border: solid 2px rgb(255, 255, 255);
-  border-radius: 20px;
-  box-shadow: 2px 2px 5px #181212;
-  margin-top: 5px;
-  margin-bottom: -10px;
-}
 
 .tripDetailsFieldTitle {
   border: black solid 2px;
