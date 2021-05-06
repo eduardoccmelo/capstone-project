@@ -106,6 +106,7 @@
 
 .myTripsButton i {
   margin-right: 5px;
+  animation: zoominoutsinglefeatured 1s infinite;
 }
 
 .travelMapFooter {
@@ -171,4 +172,16 @@
   font-size: 1.1em;
   color: rgb(9, 78, 9);
   cursor: pointer;
+}
+
+@keyframes zoominoutsinglefeatured {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.05, 1.05);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
 }

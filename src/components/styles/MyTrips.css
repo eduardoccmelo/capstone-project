@@ -105,6 +105,8 @@
 
 .myTripsButtonWorldMap i {
   margin-right: 5px;
+  animation: zoominoutsinglefeatured 1s infinite;
+  margin-bottom: -1px;
 }
 
 .myTripsButtonWorldMap i:hover {
@@ -266,6 +268,18 @@ hr {
   }
   .transportTypeIcon {
     display: none;
+  }
+}
+
+@keyframes zoominoutsinglefeatured {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.05, 1.05);
+  }
+  100% {
+    transform: scale(1, 1);
   }
 }
 
