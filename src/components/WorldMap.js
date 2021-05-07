@@ -113,7 +113,7 @@ export default function WorldMap() {
         <h2>TRAVEL MAP</h2>
       </div>
       <div className="travelMapFooter">
-        <Link to="/">
+        <Link className="myTripsButtonLink" to="/">
           <button className="travelMapButtonHome">
             <i className="fas fa-home"></i>
           </button>
