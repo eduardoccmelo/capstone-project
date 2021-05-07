@@ -5,7 +5,6 @@ export function getTripsFromLocalStorage() {
 
 export function getSingleTripFromLocalStorage(id) {
   const myTrips = getTripsFromLocalStorage();
-  console.log(myTrips);
   const singleTrip = myTrips.find((trip) => {
     return trip.id === id;
   });

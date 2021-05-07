@@ -8,14 +8,12 @@ export default function Trip() {
   const history = useHistory();
   const [singleTrip, setSingleTrip] = useState();
   const { id } = useParams();
-  console.log(id);
 
   useEffect(() => {
     const myTrip = getSingleTripFromLocalStorage(id);
     setSingleTrip(myTrip);
   }, [id]);
 
-  console.log(singleTrip);
   return singleTrip ? (
     <div className="TripDetails">
       <div className="tripDetailsHeader">
@@ -29,7 +27,9 @@ export default function Trip() {
         <div>
           <div className="tripDetailsFieldTitle">START / END</div>
           <div className="tripDetailsFieldContent">
-            {singleTrip.start.slice(8, 10)} / {singleTrip.end}
+            {singleTrip.start.slice(8, 10)}.{singleTrip.start.slice(5, 7)}
+            {" / "}
+            {singleTrip.end.slice(8, 10)}.{singleTrip.end.slice(5, 7)}
           </div>
         </div>
         {singleTrip.transportation && (
@@ -42,11 +42,16 @@ export default function Trip() {
         )}
         {singleTrip.departure && (
           <div>
-            <div className="tripDetailsFieldTitle">DEPARTURE</div>{" "}
+            <div className="tripDetailsFieldTitle">DEPARTURE</div>
             <div className="tripDetailsFieldContent">
-              {singleTrip.departure}{" "}
-              {singleTrip.arrival && <span> / {singleTrip.arrival}</span>}
+              {singleTrip.departure}
             </div>
+          </div>
+        )}
+        {singleTrip.arrival && (
+          <div>
+            <div className="tripDetailsFieldTitle">ARRIVAL</div>
+            <div className="tripDetailsFieldContent">{singleTrip.arrival}</div>
           </div>
         )}
         {singleTrip.accommodation && (
@@ -59,24 +64,35 @@ export default function Trip() {
         )}
         {singleTrip.checkinDate && (
           <div>
-            <div className="tripDetailsFieldTitle">CHECK-IN DATE / TIME </div>
+            <div className="tripDetailsFieldTitle">CHECK-IN DATE</div>
             <div className="tripDetailsFieldContent">
-              {singleTrip.checkinDate}{" "}
-              {singleTrip.checkinTime && (
-                <span>/ {singleTrip.checkinTime}</span>
-              )}
+              {singleTrip.checkinDate.slice(8, 10)}.
+              {singleTrip.checkinDate.slice(5, 7)}
             </div>
           </div>
         )}
-
+        {singleTrip.checkinTime && (
+          <div>
+            <div className="tripDetailsFieldTitle">CHECK-IN TIME</div>
+            <div className="tripDetailsFieldContent">
+              {singleTrip.checkinTime}
+            </div>
+          </div>
+        )}
         {singleTrip.checkoutDate && (
           <div>
             <div className="tripDetailsFieldTitle">CHECK-OUT DATE / TIME </div>
             <div className="tripDetailsFieldContent">
-              {singleTrip.checkoutDate}{" "}
-              {singleTrip.checkoutTime && (
-                <span>/ {singleTrip.checkoutTime}</span>
-              )}
+              {singleTrip.checkoutDate.slice(8, 10)}.
+              {singleTrip.checkoutDate.slice(5, 7)}
+            </div>
+          </div>
+        )}
+        {singleTrip.checkoutTime && (
+          <div>
+            <div className="tripDetailsFieldTitle">CHECK-OUT DATE / TIME </div>
+            <div className="tripDetailsFieldContent">
+              {singleTrip.checkoutTime}
             </div>
           </div>
         )}
