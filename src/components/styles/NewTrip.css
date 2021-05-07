@@ -79,6 +79,8 @@
 
 .inputSightseeingForm textarea {
   margin-top: 2px;
+  min-width: 320px;
+  max-width: 320px;
   width: 320px;
   height: 100px;
   font-size: 12px;
@@ -188,6 +190,8 @@
     margin: 0;
   }
   .inputSightseeingForm textarea {
+    min-width: 260px;
+    max-width: 260px;
     width: 260px;
   }
   .inputAccommodationFormName {
