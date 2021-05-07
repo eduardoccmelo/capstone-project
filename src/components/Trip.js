@@ -81,7 +81,7 @@ export default function Trip() {
         )}
         {singleTrip.checkoutDate && (
           <div>
-            <div className="tripDetailsFieldTitle">CHECK-OUT DATE / TIME </div>
+            <div className="tripDetailsFieldTitle">CHECK-OUT DATE</div>
             <div className="tripDetailsFieldContent">
               {singleTrip.checkoutDate.slice(8, 10)}.
               {singleTrip.checkoutDate.slice(5, 7)}
@@ -90,7 +90,7 @@ export default function Trip() {
         )}
         {singleTrip.checkoutTime && (
           <div>
-            <div className="tripDetailsFieldTitle">CHECK-OUT DATE / TIME </div>
+            <div className="tripDetailsFieldTitle">CHECK-OUT TIME</div>
             <div className="tripDetailsFieldContent">
               {singleTrip.checkoutTime}
             </div>
