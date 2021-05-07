@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 
 export default function Trip() {
   const history = useHistory();
-  const [singleTrip, setSingleTrip] = useState({});
+  const [singleTrip, setSingleTrip] = useState();
   const { id } = useParams();
 
   useEffect(() => {
@@ -14,13 +14,110 @@ export default function Trip() {
     setSingleTrip(myTrip);
   }, [id]);
 
-  return (
+  return singleTrip ? (
     <div className="TripDetails">
-      <h2>Trip Details</h2>
-      <p>ID: {singleTrip.id}</p>
-      <p>NAME: {singleTrip.name}</p>
-      <Link to={`/myTrips/${singleTrip.id}/edit`}>Edit</Link>
-      <button onClick={() => history.goBack()}>Back</button>
+      <div className="tripDetailsHeader">
+        <h2>TRIP DETAILS</h2>
+      </div>
+      <div className="tripDetailsContent">
+        <div>
+          <div className="tripDetailsFieldTitle">NAME</div>
+          <div className="tripDetailsFieldContent">{singleTrip.name}</div>
+        </div>
+        <div>
+          <div className="tripDetailsFieldTitle">START / END</div>
+          <div className="tripDetailsFieldContent">
+            {singleTrip.start.slice(8, 10)}.{singleTrip.start.slice(5, 7)}
+            {" / "}
+            {singleTrip.end.slice(8, 10)}.{singleTrip.end.slice(5, 7)}
+          </div>
+        </div>
+        {singleTrip.transportation && (
+          <div>
+            <div className="tripDetailsFieldTitle">TRANSPORT</div>
+            <div className="tripDetailsFieldContent">
+              {singleTrip.transportation}
+            </div>
+          </div>
+        )}
+        {singleTrip.departure && (
+          <div>
+            <div className="tripDetailsFieldTitle">DEPARTURE</div>
+            <div className="tripDetailsFieldContent">
+              {singleTrip.departure}
+            </div>
+          </div>
+        )}
+        {singleTrip.arrival && (
+          <div>
+            <div className="tripDetailsFieldTitle">ARRIVAL</div>
+            <div className="tripDetailsFieldContent">{singleTrip.arrival}</div>
+          </div>
+        )}
+        {singleTrip.accommodation && (
+          <div>
+            <div className="tripDetailsFieldTitle">ACCOMMODATION</div>{" "}
+            <div className="tripDetailsFieldContent">
+              {singleTrip.accommodation}
+            </div>
+          </div>
+        )}
+        {singleTrip.checkinDate && (
+          <div>
+            <div className="tripDetailsFieldTitle">CHECK-IN DATE</div>
+            <div className="tripDetailsFieldContent">
+              {singleTrip.checkinDate.slice(8, 10)}.
+              {singleTrip.checkinDate.slice(5, 7)}
+            </div>
+          </div>
+        )}
+        {singleTrip.checkinTime && (
+          <div>
+            <div className="tripDetailsFieldTitle">CHECK-IN TIME</div>
+            <div className="tripDetailsFieldContent">
+              {singleTrip.checkinTime}
+            </div>
+          </div>
+        )}
+        {singleTrip.checkoutDate && (
+          <div>
+            <div className="tripDetailsFieldTitle">CHECK-OUT DATE / TIME </div>
+            <div className="tripDetailsFieldContent">
+              {singleTrip.checkoutDate.slice(8, 10)}.
+              {singleTrip.checkoutDate.slice(5, 7)}
+            </div>
+          </div>
+        )}
+        {singleTrip.checkoutTime && (
+          <div>
+            <div className="tripDetailsFieldTitle">CHECK-OUT DATE / TIME </div>
+            <div className="tripDetailsFieldContent">
+              {singleTrip.checkoutTime}
+            </div>
+          </div>
+        )}
+        {singleTrip.sightseeing && (
+          <div>
+            <div className="tripDetailsFieldTitle">NOTES</div>
+            <div className="tripDetailsFieldContent">
+              {singleTrip.sightseeing}
+            </div>
+          </div>
+        )}
+      </div>
+      <div className="tripDetailsFooter">
+        <Link className="editLink" to={`/myTrips/${singleTrip.id}/edit`}>
+          <button className="editTripButton">Edit</button>
+        </Link>
+        <button
+          className="editTripCancelButton"
+          onClick={() => history.push("/myTrips")}
+        >
+          Back
+        </button>
+      </div>
     </div>
+  ) : (
+    ""
   );
 }

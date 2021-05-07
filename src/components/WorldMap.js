@@ -1,11 +1,7 @@
 import "./styles/WorldMap.css";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import ReactMapGl, {
-  Marker,
-  GeolocateControl,
-  NavigationControl,
-} from "react-map-gl";
+import ReactMapGl, { Marker, NavigationControl } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import {
   addMarkerToLocalStorage,
@@ -22,19 +18,22 @@ export default function WorldMap() {
   const [numberOfVisitedCountries, setNumberOfVisitedCountries] = useState(0);
   const [filterInputValue, setFilterInputValue] = useState("");
   const [markers, setMarkers] = useState([]);
+
+  let screenWidth = document.body.offsetWidth;
+  let mapZoom;
+  if (document.body.offsetWidth < 500) {
+    mapZoom = 0;
+  } else {
+    mapZoom = 1;
+  }
+
   const [viewPort, setViewPort] = useState({
     latitude: 42.123,
     longitude: 10.123,
-    width: "375px",
-    height: "370px",
-    zoom: 0,
+    width: `${screenWidth - 30}px`,
+    height: "320px",
+    zoom: Number(mapZoom),
   });
-
-  const geolocateStyle = {
-    float: "left",
-    margin: "10px",
-    padding: "10px",
-  };
 
   const navControlStyle = {
     right: 10,
@@ -53,6 +52,7 @@ export default function WorldMap() {
     fetch("https://restcountries.eu/rest/v2/all")
       .then((res) => res.json())
       .then((data) => {
+        data.splice(33, 1);
         setCountries(data);
       });
   }, []);
@@ -80,7 +80,7 @@ export default function WorldMap() {
   }
 
   let textContent;
-  if (numberOfVisitedCountries === 0) {
+  if (numberOfVisitedCountries === 0 || numberOfVisitedCountries.length === 0) {
     textContent = "You didn't select any Country yet";
   } else if (numberOfVisitedCountries === 1) {
     textContent = `You have visited ${getCountriesCountFromLocalStorage()} Country in the World`;
@@ -108,59 +108,73 @@ export default function WorldMap() {
   }
 
   return (
-    <div className="WorldMap">
-      <h2>WorldMap</h2>
-      <Link to="/">Home</Link>
-      <Link to="/myTrips">My Trips</Link>
-      <div>{textContent}</div>
-      <ReactMapGl
-        {...viewPort}
-        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_KEY}
-        mapStyle="mapbox://styles/eduardoccmelo/cknt22q320tjn18mug9tx4v89"
-        onViewportChange={(viewPort) => {
-          setViewPort(viewPort);
-        }}
-      >
-        {markers.length > 0 &&
-          markers.map((marker) => {
-            return (
-              <Marker
-                key={marker.name}
-                latitude={marker.latlng[0]}
-                longitude={marker.latlng[1]}
-              >
-                <div>
-                  <i
-                    onClick={() => {
-                      alert(marker.name);
-                    }}
-                    className="fas fa-map-marker-alt"
-                  ></i>
-                </div>
-              </Marker>
-            );
-          })}
-        <NavigationControl style={navControlStyle} />
-        <GeolocateControl
-          style={geolocateStyle}
-          positionOptions={{ enableHighAccuracy: true }}
-          trackUserLocation={true}
-        />
-      </ReactMapGl>
+    <div className="TravelMap">
+      <div className="travelMapHeader">
+        <h2>TRAVEL MAP</h2>
+      </div>
+      <div className="travelMapFooter">
+        <Link className="myTripsButtonLink" to="/">
+          <button className="travelMapButtonHome">
+            <i className="fas fa-home"></i>
+          </button>
+        </Link>
+        <Link className="myTripsButtonLink" to="/myTrips">
+          <button className="myTripsButton">
+            <i className="fas fa-suitcase-rolling"></i>My Trips
+          </button>
+        </Link>
+      </div>
 
-      <label htmlFor="filterInput">Country Name:</label>
-      <input
-        placeholder="Type the name of the country"
-        className="filterInput"
-        value={filterInputValue}
-        id="filterInput"
-        onChange={handleOnName}
-      ></input>
-      {filteredCountries.length === 0 && <div>No results</div>}
+      <div className="visitedCountriesCounter">{textContent}</div>
+      <div className="mapboxMap">
+        <ReactMapGl
+          {...viewPort}
+          mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_KEY}
+          mapStyle="mapbox://styles/eduardoccmelo/cknt22q320tjn18mug9tx4v89"
+          onViewportChange={(viewPort) => {
+            setViewPort(viewPort);
+          }}
+        >
+          {markers.length > 0 &&
+            markers.map((marker) => {
+              return (
+                <Marker
+                  key={marker.name}
+                  latitude={marker.latlng[0]}
+                  longitude={marker.latlng[1]}
+                >
+                  <div>
+                    <i
+                      onClick={() => {
+                        alert(marker.name);
+                      }}
+                      className="fas fa-map-marker-alt"
+                    ></i>
+                  </div>
+                </Marker>
+              );
+            })}
+          <NavigationControl style={navControlStyle} />
+        </ReactMapGl>
+      </div>
+      <div className="countryFilter">
+        <label htmlFor="filterInput">COUNTRY NAME</label>
+        <input
+          placeholder="Find a country..."
+          className="filterInput"
+          value={filterInputValue}
+          id="filterInput"
+          onChange={handleOnName}
+        ></input>
+      </div>
+
+      {filteredCountries.length === 0 && (
+        <div className="noResults">NO RESULTS</div>
+      )}
 
       {filteredCountries &&
         filteredCountries.map((country) => {
-          const { name, latlng } = country;
+          const { name, latlng, flag } = country;
           return (
             <div key={name} className="countryName">
               <input
@@ -171,7 +185,10 @@ export default function WorldMap() {
                 checked={getCheckboxState(name)}
               ></input>
 
-              <span>{name}</span>
+              <span>
+                <img className="countryFlag" alt={flag} src={flag}></img>
+                {name}
+              </span>
             </div>
           );
         })}
