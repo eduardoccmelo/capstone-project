@@ -18,12 +18,21 @@ export default function WorldMap() {
   const [numberOfVisitedCountries, setNumberOfVisitedCountries] = useState(0);
   const [filterInputValue, setFilterInputValue] = useState("");
   const [markers, setMarkers] = useState([]);
+
+  let screenWidth = document.body.offsetWidth;
+  let mapZoom;
+  if (document.body.offsetWidth < 500) {
+    mapZoom = 0;
+  } else {
+    mapZoom = 1;
+  }
+
   const [viewPort, setViewPort] = useState({
     latitude: 42.123,
     longitude: 10.123,
-    width: "365px",
-    height: "365px",
-    zoom: 0,
+    width: `${screenWidth - 30}px`,
+    height: "320px",
+    zoom: Number(mapZoom),
   });
 
   const navControlStyle = {

@@ -37,7 +37,6 @@
   padding: 5px;
   width: 50px;
   height: 50px;
-
   border-radius: 50px;
   display: flex;
   align-items: center;
@@ -130,7 +129,8 @@
   align-items: center;
   justify-content: center;
   border: solid 2px rgb(255, 255, 255);
-  width: 369px;
+  width: 320px;
+  border-radius: 0 0 10px 10px;
   background-color: rgba(37, 57, 73, 0.95);
   color: white;
   font-size: 16px;
@@ -159,7 +159,7 @@
   margin-top: 4px;
   padding: 5px 10px 5px 10px;
   border-radius: 10px;
-  width: 368px;
+  width: 320px;
   border: 2px solid black;
   background-color: rgba(255, 255, 255, 0.7);
 }

@@ -44,37 +44,37 @@ body {
 
 @media only screen and (min-width: 200px) {
   body {
-    background-size: 270%;
+    background-size: 320%;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-position: top;
+    background-position: center;
   }
 }
 
 @media only screen and (min-width: 315px) {
   body {
-    background-size: 210%;
+    background-size: 240%;
   }
 }
 
 @media only screen and (min-width: 350px) {
   body {
-    background-size: 190%;
+    background-size: 215%;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-position: top;
+    background-position: center;
   }
 }
 
 @media only screen and (min-width: 450px) {
   body {
-    background-size: 150%;
+    background-size: 170%;
   }
 }
 
 @media only screen and (min-width: 550px) {
   body {
-    background-size: 120%;
+    background-size: 140%;
     background-position: center;
   }
 }

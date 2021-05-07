@@ -38,7 +38,7 @@
   align-self: center;
   border-radius: 10px;
   margin-top: 15px;
-  align-items: center;
+  align-items: flex-start;
   font-size: 0.9em;
 }
 
@@ -52,7 +52,7 @@
 }
 .tripDetailsContent div {
   text-transform: capitalize;
-  text-align: center;
+  text-align: left;
   display: inline-flex;
   align-items: center;
 }

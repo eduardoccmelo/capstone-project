@@ -41,7 +41,7 @@ export default function EditTrip() {
       checkoutTime: inputCheckoutTime,
       sightseeing: inputSightseeing,
     });
-    history.push("/myTrips");
+    history.push(`/myTrips/${id}`);
   }
 
   useEffect(() => {
@@ -207,7 +207,7 @@ export default function EditTrip() {
                 onChange={(e) => {
                   setInputCheckoutTime(e.target.value);
                 }}
-                value={inputCheckinTime}
+                value={inputCheckoutTime}
                 id="tripCheckoutTime"
                 type="time"
               ></input>

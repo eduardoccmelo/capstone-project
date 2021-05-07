@@ -17,7 +17,7 @@ function App() {
         <main className="main">
           <Switch>
             <Route exact path="/">
-              <Home className="firstPage" />
+              <Home />
               <Logo />
             </Route>
             <Route path="/myTrips/:id/edit">

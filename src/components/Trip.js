@@ -40,7 +40,7 @@ export default function Trip() {
         )}
         {singleTrip.departure && (
           <div>
-            <div className="tripDetailsFieldTitle">DEPARTURE / ARRIVAL</div>{" "}
+            <div className="tripDetailsFieldTitle">DEPARTURE</div>{" "}
             <div className="tripDetailsFieldContent">
               {singleTrip.departure}{" "}
               {singleTrip.arrival && <span> / {singleTrip.arrival}</span>}
@@ -69,7 +69,7 @@ export default function Trip() {
 
         {singleTrip.checkoutDate && (
           <div>
-            <div className="tripDetailsFieldTitle">CHECK-IN DATE / TIME </div>
+            <div className="tripDetailsFieldTitle">CHECK-OUT DATE / TIME </div>
             <div className="tripDetailsFieldContent">
               {singleTrip.checkoutDate}{" "}
               {singleTrip.checkoutTime && (
@@ -93,7 +93,7 @@ export default function Trip() {
         </Link>
         <button
           className="editTripCancelButton"
-          onClick={() => history.goBack()}
+          onClick={() => history.push("/myTrips")}
         >
           Back
         </button>
