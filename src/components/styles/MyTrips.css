@@ -134,6 +134,7 @@
   position: fixed;
   justify-self: end;
   margin-right: 15px;
+  right: 0;
 }
 
 .myTripsHeader {
