@@ -130,7 +130,6 @@
 .myTripsFooter {
   display: flex;
   margin: 20px auto;
-  position: absolute;
   bottom: 0;
   position: fixed;
   justify-self: end;

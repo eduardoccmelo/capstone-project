@@ -6,15 +6,17 @@ import { useState, useEffect } from "react";
 
 export default function Trip() {
   const history = useHistory();
-  const [singleTrip, setSingleTrip] = useState({});
+  const [singleTrip, setSingleTrip] = useState();
   const { id } = useParams();
+  console.log(id);
 
   useEffect(() => {
     const myTrip = getSingleTripFromLocalStorage(id);
     setSingleTrip(myTrip);
   }, [id]);
 
-  return (
+  console.log(singleTrip);
+  return singleTrip ? (
     <div className="TripDetails">
       <div className="tripDetailsHeader">
         <h2>TRIP DETAILS</h2>
@@ -27,7 +29,7 @@ export default function Trip() {
         <div>
           <div className="tripDetailsFieldTitle">START / END</div>
           <div className="tripDetailsFieldContent">
-            {singleTrip.start} / {singleTrip.end}
+            {singleTrip.start.slice(8, 10)} / {singleTrip.end}
           </div>
         </div>
         {singleTrip.transportation && (
@@ -99,5 +101,7 @@ export default function Trip() {
         </button>
       </div>
     </div>
+  ) : (
+    ""
   );
 }
