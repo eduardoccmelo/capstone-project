@@ -167,7 +167,20 @@
 .fa-map-marker-alt {
   font-size: 1.1em;
   cursor: pointer;
-  color: rgb(9, 78, 9);
+  color: rgb(8, 58, 8);
+}
+
+.clusterMarker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  padding: 12px;
+  cursor: pointer;
+  color: white;
+  border: 2px solid white;
+  box-shadow: 2px 2px 5px #181212;
+  background-color: rgb(9, 78, 9);
 }
 
 @keyframes zoominoutsinglefeatured {

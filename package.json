@@ -13,6 +13,7 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "use-supercluster": "^0.2.9",
     "web-vitals": "^1.1.1",
     "worker-loader": "^3.0.8"
   },

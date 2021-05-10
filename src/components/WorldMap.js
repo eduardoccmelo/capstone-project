@@ -1,8 +1,12 @@
 import "./styles/WorldMap.css";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import ReactMapGl, { Marker, NavigationControl } from "react-map-gl";
-import "mapbox-gl/dist/mapbox-gl.css";
+import React, { useState, useEffect, useRef } from "react";
+import ReactMapGl, {
+  Marker,
+  NavigationControl,
+  FlyToInterpolator,
+} from "react-map-gl";
+import useSupercluster from "use-supercluster";
 import {
   addMarkerToLocalStorage,
   getMarkersFromLocalStorage,
@@ -18,10 +22,11 @@ export default function WorldMap() {
   const [numberOfVisitedCountries, setNumberOfVisitedCountries] = useState(0);
   const [filterInputValue, setFilterInputValue] = useState("");
   const [markers, setMarkers] = useState([]);
+  const mapRef = useRef();
 
   let screenWidth = document.body.offsetWidth;
   let mapZoom;
-  if (document.body.offsetWidth < 500) {
+  if (document.body.offsetWidth < 700) {
     mapZoom = 0;
   } else {
     mapZoom = 1;
@@ -31,7 +36,7 @@ export default function WorldMap() {
     latitude: 24.123,
     longitude: 17.123,
     width: `${screenWidth - 30}px`,
-    height: "220px",
+    height: "33vh",
     zoom: Number(mapZoom),
   });
 
@@ -107,6 +112,29 @@ export default function WorldMap() {
     localStorage.setItem("markerData", JSON.stringify(newMarkers));
   }
 
+  const points = markers.map((marker) => ({
+    type: "Feature",
+    properties: {
+      cluster: false,
+      markerId: marker.name,
+    },
+    geometry: {
+      type: "Point",
+      coordinates: [parseFloat(marker.latlng[1]), parseFloat(marker.latlng[0])],
+    },
+  }));
+
+  const bounds = mapRef.current
+    ? mapRef.current.getMap().getBounds().toArray().flat()
+    : null;
+
+  const { clusters, supercluster } = useSupercluster({
+    points,
+    bounds,
+    zoom: viewPort.zoom,
+    options: { radius: 43, maxZoom: 7 },
+  });
+
   return (
     <div className="TravelMap">
       <div className="travelMapHeader">
@@ -117,24 +145,69 @@ export default function WorldMap() {
       <div className="mapboxMap">
         <ReactMapGl
           {...viewPort}
+          maxZoom={7}
           mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_KEY}
           mapStyle="mapbox://styles/eduardoccmelo/cknt22q320tjn18mug9tx4v89"
           onViewportChange={(viewPort) => {
             setViewPort(viewPort);
           }}
+          ref={mapRef}
         >
           {markers.length > 0 &&
-            markers.map((marker) => {
+            clusters.map((cluster) => {
+              const [longitude, latitude] = cluster.geometry.coordinates;
+              const {
+                cluster: isCluster,
+                point_count: pointCount,
+              } = cluster.properties;
+              if (isCluster) {
+                return (
+                  <Marker
+                    key={cluster.id}
+                    latitude={latitude}
+                    longitude={longitude}
+                  >
+                    <div
+                      className="clusterMarker"
+                      style={{
+                        width: `${10 + (pointCount / points.length) * 120}px`,
+                        height: `${10 + (pointCount / points.length) * 120}px`,
+                      }}
+                      onClick={() => {
+                        const expansionZoom = Math.min(
+                          supercluster.getClusterExpansionZoom(cluster.id),
+                          20
+                        );
+                        setViewPort({
+                          ...viewPort,
+                          latitude,
+                          longitude,
+                          zoom: expansionZoom,
+                          transitionInterpolator: new FlyToInterpolator({
+                            speed: 2,
+                          }),
+                          transitionDuration: "auto",
+                        });
+                      }}
+                    >
+                      {pointCount}
+                    </div>
+                  </Marker>
+                );
+              }
+
               return (
                 <Marker
-                  key={marker.name}
-                  latitude={marker.latlng[0]}
-                  longitude={marker.latlng[1]}
+                  key={cluster.properties.markerId}
+                  latitude={latitude}
+                  longitude={longitude}
+                  offsetLeft={-10}
+                  offsetTop={-12}
                 >
                   <div>
                     <i
                       onClick={() => {
-                        alert(marker.name);
+                        alert(cluster.properties.markerId);
                       }}
                       className="fas fa-map-marker-alt"
                     ></i>
