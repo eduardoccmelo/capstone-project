@@ -28,10 +28,10 @@ export default function WorldMap() {
   }
 
   const [viewPort, setViewPort] = useState({
-    latitude: 42.123,
-    longitude: 10.123,
+    latitude: 24.123,
+    longitude: 17.123,
     width: `${screenWidth - 30}px`,
-    height: "320px",
+    height: "220px",
     zoom: Number(mapZoom),
   });
 
@@ -112,18 +112,6 @@ export default function WorldMap() {
       <div className="travelMapHeader">
         <h2>TRAVEL MAP</h2>
       </div>
-      <div className="travelMapFooter">
-        <Link className="myTripsButtonLink" to="/">
-          <button className="travelMapButtonHome">
-            <i className="fas fa-home"></i>
-          </button>
-        </Link>
-        <Link className="myTripsButtonLink" to="/myTrips">
-          <button className="myTripsButton">
-            <i className="fas fa-suitcase-rolling"></i>My Trips
-          </button>
-        </Link>
-      </div>
 
       <div className="visitedCountriesCounter">{textContent}</div>
       <div className="mapboxMap">
@@ -169,7 +157,9 @@ export default function WorldMap() {
       </div>
 
       {filteredCountries.length === 0 && (
-        <div className="noResults">NO RESULTS</div>
+        <div className="noResults">
+          <i className="fas fa-exclamation-circle"></i>NO RESULTS
+        </div>
       )}
 
       {filteredCountries &&
@@ -192,6 +182,18 @@ export default function WorldMap() {
             </div>
           );
         })}
+      <div className="travelMapFooter">
+        <Link className="myTripsButtonLink" to="/">
+          <button className="travelMapButtonHome">
+            <i className="fas fa-home"></i>
+          </button>
+        </Link>
+        <Link className="myTripsButtonLink" to="/myTrips">
+          <button className="myTripsButton">
+            <i className="fas fa-suitcase-rolling"></i>My Trips
+          </button>
+        </Link>
+      </div>
     </div>
   );
 }

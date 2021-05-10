@@ -1,41 +1,37 @@
 .homePageContent {
-  margin: 10px;
   display: grid;
-  justify-items: center;
   align-items: center;
   position: absolute;
+  margin: 10px;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
 }
 
-.myTravelsHome {
-  border-radius: 50%;
-  animation: zoominoutsinglefeatured 1s infinite;
-  box-shadow: -1px -1px 2px 1px #000 inset, 0 0 10px 1px rgba(0, 0, 0, 0.365);
-  background-size: cover;
-  width: 40px;
-  height: 40px;
-  background-image: url("/src/images/lake.jpg");
+.myTravelsHome,
+.earth {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   margin-right: 10px;
+  background-size: cover;
+}
+
+.myTravelsHome {
+  background-image: url("/src/images/lake.jpg");
+  box-shadow: -1px -1px 2px 1px #000 inset, 0 0 10px 1px rgba(0, 0, 0, 0.365);
+  animation: zoominoutsinglefeatured 1s infinite;
 }
 
 .earth {
-  border-radius: 50%;
+  background-image: url("/src/images/earth.png");
+  background-size: cover;
   box-shadow: -1px -1px 2px 1px #000 inset, 0 0 10px 1px rgba(0, 0, 0, 0.598);
   animation: spin 10s linear alternate infinite;
-  background-size: cover;
-  width: 40px;
-  height: 40px;
-  background-image: url("/src/images/earth.png");
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 10px;
 }
 
 .homeLink1:hover,
@@ -45,36 +41,35 @@
 
 .homeLink1,
 .homeLink2 {
-  text-decoration: none;
-  align-content: center;
-  align-items: center;
   display: flex;
   flex-direction: column;
+  align-content: center;
+  align-items: center;
+  text-decoration: none;
   font-size: 1.2em;
 }
 
 .homeLink1 {
-  margin-bottom: -150px;
+  margin-top: 120px;
 }
 .homeLink2 {
-  margin-top: -250px;
+  margin-bottom: 150px;
 }
 
 .homePageLinksTitles {
-  font-size: 1.2em;
-  font-weight: 700;
-  margin-bottom: 15px;
-  margin-top: 5px;
-  background-color: rgba(37, 57, 73, 0.7);
-  color: white;
-  padding: 15px;
-  text-align: center;
-  border-radius: 50px;
-  border: solid 2px rgb(255, 255, 255);
-  box-shadow: 4px 4px 5px #181212;
-  z-index: 1;
   display: flex;
   align-items: center;
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: 700;
+  margin: 5px 0 15px 0;
+  padding: 15px;
+  border-radius: 50px;
+  color: white;
+  border: solid 2px rgb(255, 255, 255);
+  box-shadow: 4px 4px 5px #181212;
+  background-color: rgba(37, 57, 73, 0.863);
+  z-index: 1;
 }
 
 @keyframes zoominoutsinglefeatured {

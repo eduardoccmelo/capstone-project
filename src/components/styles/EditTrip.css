@@ -7,28 +7,25 @@
 }
 
 .editTripHeader {
-  padding-top: 20px;
-  padding-left: 16px;
   display: flex;
   justify-self: left;
   justify-content: left;
   align-items: center;
   margin-left: 20px;
+  padding: 20px 0 0 16px;
   z-index: 1;
 }
 
 .EditTrip h2 {
   font-size: 1.9em;
-  margin-left: -160px;
-  margin-bottom: 10px;
-  margin-top: 5px;
-  background-color: rgba(37, 57, 73, 0.95);
-  color: white;
+  margin: 5px 0 10px -160px;
   width: 300px;
   text-align: end;
-  border-radius: 50px;
   padding-right: 20px;
+  border-radius: 50px;
+  color: white;
   border: solid 2px rgb(255, 255, 255);
+  background-color: rgba(37, 57, 73, 0.95);
   box-shadow: 2px 2px 5px #181212;
 }
 
@@ -37,19 +34,17 @@
 .formTransport,
 .formAccommodation,
 .formSightseeing {
-  border: rgb(255, 255, 255) solid 2px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 350px;
   margin: 3px;
-  padding: 5px;
+  padding-top: 10px 0 10px 0;
+  border-radius: 10px;
+  color: white;
   background-color: rgba(37, 57, 73, 0.95);
   box-shadow: 2px 2px 5px #2e2828;
-  color: white;
-  align-items: center;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  border-radius: 10px;
+  border: rgb(255, 255, 255) solid 2px;
 }
 
 .formTravelDates {
@@ -78,9 +73,9 @@
 }
 
 .inputSightseeingForm textarea {
-  margin-top: 2px;
   width: 320px;
   height: 100px;
+  margin-top: 2px;
   font-size: 12px;
 }
 
@@ -95,8 +90,7 @@
 .inputTranportTimeForm input,
 .inputAccommodationForm input {
   padding-left: 13px;
-  margin-left: 3px;
-  margin-bottom: 2px;
+  margin-left: 0 0 2px 3px;
 }
 
 .checkinCheckout,
@@ -134,27 +128,26 @@
 }
 
 .editTripFooter {
-  margin-top: 8px;
-  margin-bottom: 8px;
   display: flex;
+  margin: 8px 0;
 }
 
 .editFromTripButton,
 .cancelNewTripButton {
-  border: solid 2px rgb(255, 255, 255);
-  background-color: rgba(37, 57, 73, 0.95);
-  color: white;
-  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100px;
   height: 50px;
-  box-shadow: 2px 2px 5px #181212;
   font-weight: 700;
   font-size: 0.9em;
   cursor: pointer;
   margin: 0 10px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px #181212;
+  border: solid 2px rgb(255, 255, 255);
+  background-color: rgba(37, 57, 73, 0.95);
+  color: white;
 }
 
 .editFromTripButton {
