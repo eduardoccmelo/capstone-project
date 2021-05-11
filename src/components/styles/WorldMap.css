@@ -24,6 +24,26 @@
   background-color: rgba(37, 57, 73, 0.95);
 }
 
+.backToTopButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: -5px;
+  bottom: 60px;
+  width: 50px;
+  height: 50px;
+  margin-right: 6px;
+  padding: 5px;
+  border-radius: 50px;
+  font-size: 20px;
+  cursor: pointer;
+  color: white;
+  border: solid 2px rgb(255, 255, 255);
+  box-shadow: 2px 2px 5px #181212;
+  background-color: rgb(37, 57, 73);
+}
+
 .travelMapButtonHome {
   display: flex;
   align-items: center;
@@ -33,7 +53,6 @@
   margin-right: 6px;
   padding: 5px;
   border-radius: 50px;
-  text-decoration: none;
   font-size: 20px;
   cursor: pointer;
   color: white;
@@ -52,7 +71,6 @@
   padding: 15px;
   font-weight: 700;
   font-size: 1.1em;
-  text-decoration: none;
   border-radius: 10px;
   cursor: pointer;
   color: white;
@@ -66,14 +84,14 @@
   align-self: center;
   justify-content: center;
   text-align: center;
-  width: 320px;
+  width: 335px;
   padding: 5px 0 5px 0;
   margin: 5px 0 -2px 0;
-  font-size: 16px;
+  font-size: 14px;
   border-radius: 10px 10px 0 0;
   color: white;
   border: solid 2px rgb(255, 255, 255);
-  background-color: rgba(37, 57, 73, 0.95);
+  background-color: rgba(37, 57, 73, 1);
 }
 
 .countryFlag {
@@ -85,13 +103,14 @@
   border: solid 2px rgb(255, 255, 255);
   align-self: center;
   box-shadow: 2px 2px 5px #181212;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 10px;
 }
 
-.travelMapButtonHome:hover {
-  scale: 105%;
-}
-
-.myTripsButton:hover {
+.travelMapButtonHome:hover,
+.myTripsButton:hover,
+.backToTopButton:hover {
   scale: 105%;
 }
 
@@ -109,7 +128,8 @@
   right: 0;
 }
 
-.myTripsButtonLink {
+.myTripsButtonLink,
+.backToTopLink {
   text-decoration: none;
 }
 
@@ -118,14 +138,17 @@
   align-self: center;
   justify-content: center;
   text-align: center;
-  width: 320px;
+  width: 335px;
   border-radius: 10px;
   font-size: 16px;
   margin-top: 5px;
   padding: 10px 0 10px 0;
   color: white;
   border: solid 2px rgb(255, 255, 255);
-  background-color: rgba(37, 57, 73, 0.95);
+  background-color: rgba(37, 57, 73, 1);
+  position: -webkit-sticky;
+  position: sticky;
+  top: 270px;
 }
 
 .countryFilter input {
@@ -164,10 +187,47 @@
   margin-right: 5px;
 }
 
-.fa-map-marker-alt {
-  font-size: 1.1em;
+.fa-check-circle {
+  font-size: 1em;
   cursor: pointer;
-  color: rgb(9, 78, 9);
+  color: rgb(2, 31, 2);
+  box-shadow: 2px 2px 5px #000000;
+  border-radius: 50%;
+  border: 1px solid white;
+}
+
+.clusterMarker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  padding: 12px;
+  cursor: pointer;
+  color: white;
+  border: 2px solid white;
+  box-shadow: 2px 2px 5px #181212;
+  background-color: rgb(9, 78, 9);
+}
+
+.mapboxgl-popup-content {
+  box-shadow: 2px 2px 5px #000000;
+  padding: 10px 30px 10px 10px;
+  background-color: rgba(37, 57, 73, 1);
+  color: white;
+}
+
+.mapboxgl-popup-content button {
+  font-weight: 700;
+  background-color: darkred;
+  color: white;
+  font-size: 20px;
+  height: 100%;
+  margin-left: 20px;
+  padding: 5px;
+}
+
+.mapboxgl-popup-content button:hover {
+  background-color: rgb(82, 9, 9);
 }
 
 @keyframes zoominoutsinglefeatured {

@@ -1,0 +1,33 @@
+.pageNotFound {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  margin: 10px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-size: 24px;
+}
+
+.pageNotFoundButtonHome {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  width: 50px;
+  height: 50px;
+  padding: 5px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: white;
+  border: solid 2px rgb(255, 255, 255);
+  box-shadow: 2px 2px 5px #181212;
+  background-color: rgb(37, 57, 73);
+}
+
+.pageNotFoundButtonHome:hover {
+  scale: 105%;
+}

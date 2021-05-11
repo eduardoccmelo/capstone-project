@@ -1,8 +1,13 @@
 import "./styles/WorldMap.css";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import ReactMapGl, { Marker, NavigationControl } from "react-map-gl";
-import "mapbox-gl/dist/mapbox-gl.css";
+import React, { useState, useEffect, useRef } from "react";
+import ReactMapGl, {
+  Marker,
+  Popup,
+  NavigationControl,
+  FlyToInterpolator,
+} from "react-map-gl";
+import useSupercluster from "use-supercluster";
 import {
   addMarkerToLocalStorage,
   getMarkersFromLocalStorage,
@@ -18,10 +23,13 @@ export default function WorldMap() {
   const [numberOfVisitedCountries, setNumberOfVisitedCountries] = useState(0);
   const [filterInputValue, setFilterInputValue] = useState("");
   const [markers, setMarkers] = useState([]);
+  const [clickedCountry, setClickedCountry] = useState(null);
+  const mapRef = useRef();
+  const percentage = (markers.length / 249) * 100;
 
   let screenWidth = document.body.offsetWidth;
   let mapZoom;
-  if (document.body.offsetWidth < 500) {
+  if (document.body.offsetWidth < 700) {
     mapZoom = 0;
   } else {
     mapZoom = 1;
@@ -29,9 +37,9 @@ export default function WorldMap() {
 
   const [viewPort, setViewPort] = useState({
     latitude: 24.123,
-    longitude: 17.123,
+    longitude: 19.123,
     width: `${screenWidth - 30}px`,
-    height: "220px",
+    height: "250px",
     zoom: Number(mapZoom),
   });
 
@@ -63,6 +71,18 @@ export default function WorldMap() {
     setNumberOfVisitedCountries(getCountriesCountFromLocalStorage());
   }, []);
 
+  useEffect(() => {
+    const listener = (e) => {
+      if (e.key === "Escape") {
+        setClickedCountry(null);
+      }
+    };
+    window.addEventListener("keydown", listener);
+    return () => {
+      window.removeEventListener("keydown", listener);
+    };
+  }, []);
+
   function handleClick(e, latlng, name) {
     if (e.target.checked === true) {
       setNumberOfVisitedCountries(numberOfVisitedCountries + 1);
@@ -83,9 +103,13 @@ export default function WorldMap() {
   if (numberOfVisitedCountries === 0 || numberOfVisitedCountries.length === 0) {
     textContent = "You didn't select any Country yet";
   } else if (numberOfVisitedCountries === 1) {
-    textContent = `You have visited ${getCountriesCountFromLocalStorage()} Country in the World`;
+    textContent = `You have visited ${getCountriesCountFromLocalStorage()} Country in the World (${Math.round(
+      percentage
+    )}%)`;
   } else {
-    textContent = `You have visited ${getCountriesCountFromLocalStorage()} Countries in the World`;
+    textContent = `You have visited ${getCountriesCountFromLocalStorage()} Countries in the World (${Math.round(
+      percentage
+    )}%)`;
   }
 
   function handleOnName(e) {
@@ -107,8 +131,31 @@ export default function WorldMap() {
     localStorage.setItem("markerData", JSON.stringify(newMarkers));
   }
 
+  const points = markers.map((marker) => ({
+    type: "Feature",
+    properties: {
+      cluster: false,
+      markerId: marker.name,
+    },
+    geometry: {
+      type: "Point",
+      coordinates: [parseFloat(marker.latlng[1]), parseFloat(marker.latlng[0])],
+    },
+  }));
+
+  const bounds = mapRef.current
+    ? mapRef.current.getMap().getBounds().toArray().flat()
+    : null;
+
+  const { clusters, supercluster } = useSupercluster({
+    points,
+    bounds,
+    zoom: viewPort.zoom,
+    options: { radius: 40, maxZoom: 7 },
+  });
+
   return (
-    <div className="TravelMap">
+    <div className="TravelMap" id="top">
       <div className="travelMapHeader">
         <h2>TRAVEL MAP</h2>
       </div>
@@ -117,31 +164,88 @@ export default function WorldMap() {
       <div className="mapboxMap">
         <ReactMapGl
           {...viewPort}
+          maxZoom={7}
           mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_KEY}
           mapStyle="mapbox://styles/eduardoccmelo/cknt22q320tjn18mug9tx4v89"
           onViewportChange={(viewPort) => {
             setViewPort(viewPort);
           }}
+          ref={mapRef}
         >
           {markers.length > 0 &&
-            markers.map((marker) => {
+            clusters.map((cluster) => {
+              const [longitude, latitude] = cluster.geometry.coordinates;
+              const {
+                cluster: isCluster,
+                point_count: pointCount,
+              } = cluster.properties;
+              if (isCluster) {
+                return (
+                  <Marker
+                    key={cluster.id}
+                    latitude={latitude}
+                    longitude={longitude}
+                  >
+                    <div
+                      className="clusterMarker"
+                      style={{
+                        width: `${10 + (pointCount / points.length) * 50}px`,
+                        height: `${10 + (pointCount / points.length) * 50}px`,
+                      }}
+                      onClick={() => {
+                        const expansionZoom = Math.min(
+                          supercluster.getClusterExpansionZoom(cluster.id),
+                          20
+                        );
+                        setViewPort({
+                          ...viewPort,
+                          latitude,
+                          longitude,
+                          zoom: expansionZoom,
+                          transitionInterpolator: new FlyToInterpolator({
+                            speed: 2,
+                          }),
+                          transitionDuration: "auto",
+                        });
+                      }}
+                    >
+                      {pointCount}
+                    </div>
+                  </Marker>
+                );
+              }
+
               return (
                 <Marker
-                  key={marker.name}
-                  latitude={marker.latlng[0]}
-                  longitude={marker.latlng[1]}
+                  key={cluster.properties.markerId}
+                  latitude={latitude}
+                  longitude={longitude}
+                  offsetLeft={-10}
+                  offsetTop={-12}
                 >
-                  <div>
-                    <i
-                      onClick={() => {
-                        alert(marker.name);
-                      }}
-                      className="fas fa-map-marker-alt"
-                    ></i>
+                  <div
+                    onClick={(e) => {
+                      setClickedCountry(cluster);
+                    }}
+                  >
+                    <i className="fas fa-check-circle"></i>
                   </div>
                 </Marker>
               );
             })}
+          {clickedCountry && (
+            <Popup
+              latitude={clickedCountry.geometry.coordinates[1]}
+              longitude={clickedCountry.geometry.coordinates[0]}
+              onClose={() => {
+                setClickedCountry(null);
+              }}
+            >
+              <div>
+                <h3>{clickedCountry.properties.markerId}</h3>
+              </div>
+            </Popup>
+          )}
           <NavigationControl style={navControlStyle} />
         </ReactMapGl>
       </div>
@@ -183,7 +287,12 @@ export default function WorldMap() {
           );
         })}
       <div className="travelMapFooter">
-        <Link className="myTripsButtonLink" to="/">
+        <a href="#top" className="backToTopLink">
+          <div className="backToTopButton">
+            <i className="fas fa-arrow-up"></i>
+          </div>
+        </a>
+        <Link className="myTripsButtonLink" to="">
           <button className="travelMapButtonHome">
             <i className="fas fa-home"></i>
           </button>

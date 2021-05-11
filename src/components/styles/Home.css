@@ -34,11 +34,6 @@
   animation: spin 10s linear alternate infinite;
 }
 
-.homeLink1:hover,
-.homeLink2:hover {
-  scale: 105%;
-}
-
 .homeLink1,
 .homeLink2 {
   display: flex;

@@ -8,6 +8,7 @@ import NewTrip from "./components/NewTrip";
 import Trip from "./components/Trip";
 import WorldMap from "./components/WorldMap";
 import Logo from "./components/Logo";
+import PageNotFound from "./components/PageNotFound";
 
 function App() {
   return (
@@ -41,7 +42,8 @@ function App() {
               <Logo />
             </Route>
             <Route path="*">
-              <p>Page Not Found</p>
+              <PageNotFound />
+              <Logo />
             </Route>
           </Switch>
         </main>
