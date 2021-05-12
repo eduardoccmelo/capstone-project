@@ -1,12 +1,6 @@
 import "./styles/WorldMap.css";
 import { Link } from "react-router-dom";
 import React, { useState, useEffect, useRef } from "react";
-import ReactMapGl, {
-  Marker,
-  Popup,
-  NavigationControl,
-  FlyToInterpolator,
-} from "react-map-gl";
 import useSupercluster from "use-supercluster";
 import {
   addMarkerToLocalStorage,
@@ -17,6 +11,8 @@ import {
   removeCountryCountFromLocalStorage,
   getCountriesCountFromLocalStorage,
 } from "../services/countriesCountStorage";
+import TravelMap from "./TravelMap";
+import CountryOption from "./CountryOption";
 
 export default function WorldMap() {
   const [countries, setCountries] = useState([]);
@@ -42,11 +38,6 @@ export default function WorldMap() {
     height: "250px",
     zoom: Number(mapZoom),
   });
-
-  const navControlStyle = {
-    right: 10,
-    top: 10,
-  };
 
   const filteredCountries =
     countries.length > 0 &&
@@ -162,92 +153,17 @@ export default function WorldMap() {
 
       <div className="visitedCountriesCounter">{textContent}</div>
       <div className="mapboxMap">
-        <ReactMapGl
-          {...viewPort}
-          maxZoom={7}
-          mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_KEY}
-          mapStyle="mapbox://styles/eduardoccmelo/cknt22q320tjn18mug9tx4v89"
-          onViewportChange={(viewPort) => {
-            setViewPort(viewPort);
-          }}
-          ref={mapRef}
-        >
-          {markers.length > 0 &&
-            clusters.map((cluster) => {
-              const [longitude, latitude] = cluster.geometry.coordinates;
-              const {
-                cluster: isCluster,
-                point_count: pointCount,
-              } = cluster.properties;
-              if (isCluster) {
-                return (
-                  <Marker
-                    key={cluster.id}
-                    latitude={latitude}
-                    longitude={longitude}
-                  >
-                    <div
-                      className="clusterMarker"
-                      style={{
-                        width: `${10 + (pointCount / points.length) * 50}px`,
-                        height: `${10 + (pointCount / points.length) * 50}px`,
-                      }}
-                      onClick={() => {
-                        const expansionZoom = Math.min(
-                          supercluster.getClusterExpansionZoom(cluster.id),
-                          20
-                        );
-                        setViewPort({
-                          ...viewPort,
-                          latitude,
-                          longitude,
-                          zoom: expansionZoom,
-                          transitionInterpolator: new FlyToInterpolator({
-                            speed: 2,
-                          }),
-                          transitionDuration: "auto",
-                        });
-                      }}
-                    >
-                      {pointCount}
-                    </div>
-                  </Marker>
-                );
-              }
-
-              return (
-                <Marker
-                  key={cluster.properties.markerId}
-                  latitude={latitude}
-                  longitude={longitude}
-                  offsetLeft={-10}
-                  offsetTop={-12}
-                >
-                  <div
-                    onClick={(e) => {
-                      setClickedCountry(cluster);
-                    }}
-                  >
-                    <i className="fas fa-check-circle"></i>
-                  </div>
-                </Marker>
-              );
-            })}
-          {clickedCountry && (
-            <Popup
-              latitude={clickedCountry.geometry.coordinates[1]}
-              longitude={clickedCountry.geometry.coordinates[0]}
-              onClose={() => {
-                setClickedCountry(null);
-              }}
-            >
-              <div>
-                <h3>{clickedCountry.properties.markerId}</h3>
-              </div>
-            </Popup>
-          )}
-          <NavigationControl style={navControlStyle} />
-        </ReactMapGl>
+        <TravelMap
+          points={points}
+          markers={markers}
+          mapRef={mapRef}
+          clusters={clusters}
+          supercluster={supercluster}
+          clickedCountry={clickedCountry}
+          setClickedCountry={setClickedCountry}
+          viewPort={viewPort}
+          setViewPort={setViewPort}
+        />
       </div>
       <div className="countryFilter">
         <label htmlFor="filterInput">COUNTRY NAME</label>
@@ -270,20 +186,14 @@ export default function WorldMap() {
         filteredCountries.map((country) => {
           const { name, latlng, flag } = country;
           return (
-            <div key={name} className="countryName">
-              <input
-                onChange={(e) => handleClick(e, latlng, name)}
-                className="checkbox"
-                type="checkbox"
-                value={name}
-                checked={getCheckboxState(name)}
-              ></input>
-
-              <span>
-                <img className="countryFlag" alt={flag} src={flag}></img>
-                {name}
-              </span>
-            </div>
+            <CountryOption
+              key={name}
+              name={name}
+              latlng={latlng}
+              flag={flag}
+              handleClick={handleClick}
+              getCheckboxState={getCheckboxState}
+            />
           );
         })}
       <div className="travelMapFooter">

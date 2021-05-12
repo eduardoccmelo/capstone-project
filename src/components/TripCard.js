@@ -1,0 +1,38 @@
+import { Link } from "react-router-dom";
+import TransportIcon from "./TransportIcon";
+
+export default function TripCard({
+  handleRemoveTrip,
+  name,
+  id,
+  transportation,
+  startDay,
+  startMonth,
+  endDay,
+  endMonth,
+}) {
+  return (
+    <div key={id} className="myTripsItem">
+      <button className="removeButton" onClick={() => handleRemoveTrip(name)}>
+        <i className="fas fa-trash-alt"></i>
+      </button>
+      <TransportIcon
+        name={name}
+        transportation={transportation}
+        startDay={startDay}
+        startMonth={startMonth}
+        endDay={endDay}
+        endMonth={endMonth}
+      />
+      <Link to={`/myTrips/${id}`}>
+        <button className="tripViewButton">View</button>
+        <div className="barcode">
+          <i className="fas fa-barcode"></i>
+          <i className="fas fa-barcode"></i>
+          <i className="fas fa-barcode"></i>
+          <i className="fas fa-barcode"></i>
+        </div>
+      </Link>
+    </div>
+  );
+}

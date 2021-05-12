@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getTripsFromLocalStorage } from "../services/myTripsStorage";
 
+import TripCard from "./TripCard";
+
 export default function MyTrips() {
   const [trips, setTrips] = useState([]);
 
@@ -11,12 +13,12 @@ export default function MyTrips() {
     setTrips(myTrips);
   }, []);
 
-  function handleRemoveTrip(trip) {
+  function handleRemoveTrip(name) {
     const confirmation = window.confirm(
       "Do you really want to delete your Trip?"
     );
     if (confirmation === true) {
-      removeTripFromLocalStorage(trip);
+      removeTripFromLocalStorage(name);
       const myTrips = getTripsFromLocalStorage();
       setTrips(myTrips);
     }
@@ -36,72 +38,18 @@ export default function MyTrips() {
       const startMonth = trip.start.slice(5, 7);
       const endDay = trip.end.slice(8, 10);
       const endMonth = trip.end.slice(5, 7);
-
       return (
-        <div key={trip.id} className="myTripsItem">
-          <button
-            className="removeButton"
-            onClick={() => handleRemoveTrip(trip.name)}
-          >
-            <i className="fas fa-trash-alt"></i>
-          </button>
-          <div>
-            {trip.transportation === "car" && (
-              <span className="transportTypeIcon">
-                <i className="fas fa-car"></i>
-              </span>
-            )}
-            {trip.transportation === "bus" && (
-              <span className="transportTypeIcon">
-                <i className="fas fa-bus"></i>
-              </span>
-            )}
-            {trip.transportation === "train" && (
-              <span className="transportTypeIcon">
-                <i className="fas fa-train"></i>
-              </span>
-            )}
-            {trip.transportation === "plane" && (
-              <span className="transportTypeIcon">
-                <i className="fas fa-plane"></i>
-              </span>
-            )}
-            {trip.transportation === "other" && (
-              <span className="transportTypeIcon">
-                <i className="fas fa-suitcase"></i>
-              </span>
-            )}
-            {trip.transportation === "none" && (
-              <span className="transportTypeIcon">
-                <i className="fas fa-suitcase"></i>
-              </span>
-            )}
-            {trip.transportation === "" && (
-              <span className="transportTypeIcon">
-                <i className="fas fa-suitcase"></i>
-              </span>
-            )}
-            <span className="tripName">{trip.name}</span>
-          </div>
-          <hr></hr>
-          <div className="tripDates">
-            <div className="tripStart">
-              {startDay}.{startMonth}
-            </div>
-            <div className="tripEnd">
-              {endDay}.{endMonth}
-            </div>
-          </div>
-          <Link to={`/myTrips/${trip.id}`}>
-            <button className="tripViewButton">View</button>
-            <div className="barcode">
-              <i className="fas fa-barcode"></i>
-              <i className="fas fa-barcode"></i>
-              <i className="fas fa-barcode"></i>
-              <i className="fas fa-barcode"></i>
-            </div>
-          </Link>
-        </div>
+        <TripCard
+          key={trip.id}
+          handleRemoveTrip={handleRemoveTrip}
+          name={trip.name}
+          id={trip.id}
+          transportation={trip.transportation}
+          startDay={startDay}
+          startMonth={startMonth}
+          endDay={endDay}
+          endMonth={endMonth}
+        />
       );
     });
   }
