@@ -23,6 +23,8 @@ export default function EditTrip() {
   const [inputCheckoutDate, setInputCheckoutDate] = useState("");
   const [inputCheckoutTime, setInputCheckoutTime] = useState("");
   const [inputSightseeing, setInputSightseeing] = useState("");
+  const [allSightseeings, setAllSightseeings] = useState([]);
+  const [inputNotes, setInputNotes] = useState("");
 
   function handleOnSubmit(e) {
     e.preventDefault();
@@ -39,7 +41,8 @@ export default function EditTrip() {
       checkinTime: inputCheckinTime,
       checkoutDate: inputCheckoutDate,
       checkoutTime: inputCheckoutTime,
-      sightseeing: inputSightseeing,
+      sightseeings: allSightseeings,
+      notes: inputNotes,
     });
     history.push(`/myTrips/${id}`);
   }
@@ -57,8 +60,20 @@ export default function EditTrip() {
     setInputCheckinTime(myTrip.checkinTime);
     setInputCheckoutDate(myTrip.checkoutDate);
     setInputCheckoutTime(myTrip.checkinTime);
-    setInputSightseeing(myTrip.sightseeing);
+    setAllSightseeings(myTrip.sightseeings);
+    setInputNotes(myTrip.notes);
   }, [id]);
+
+  function handleSightseeingOnClick(e) {
+    e.preventDefault();
+    if (inputSightseeing !== "") {
+      setAllSightseeings([
+        ...allSightseeings,
+        { sightseeing: inputSightseeing },
+      ]);
+    }
+    setInputSightseeing("");
+  }
 
   return (
     <div className="EditTrip">
@@ -83,7 +98,7 @@ export default function EditTrip() {
         inputCheckoutDate={inputCheckoutDate}
         setInputCheckoutDate={setInputCheckoutDate}
         setInputCheckoutTime={setInputCheckoutTime}
-        setInputSightseeing={setInputSightseeing}
+        setInputNotes={setInputNotes}
         inputTransportType={inputTransportType}
         inputTripDeparture={inputTripDeparture}
         inputTripArrival={inputTripArrival}
@@ -91,6 +106,11 @@ export default function EditTrip() {
         inputCheckinTime={inputCheckinTime}
         inputCheckoutTime={inputCheckoutTime}
         inputSightseeing={inputSightseeing}
+        setInputSightseeing={setInputSightseeing}
+        allSightseeings={allSightseeings}
+        setAllSightseeings={setAllSightseeings}
+        inputNotes={inputNotes}
+        handleSightseeingOnClick={handleSightseeingOnClick}
       />
     </div>
   );

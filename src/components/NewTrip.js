@@ -18,6 +18,8 @@ export default function NewTrip() {
   const [inputCheckoutDate, setInputCheckoutDate] = useState("");
   const [inputCheckoutTime, setInputCheckoutTime] = useState("");
   const [inputSightseeing, setInputSightseeing] = useState("");
+  const [allSightseeings, setAllSightseeings] = useState([]);
+  const [inputNotes, setInputNotes] = useState("");
   const history = useHistory();
 
   function handleOnSubmit(e) {
@@ -39,9 +41,21 @@ export default function NewTrip() {
       checkinTime: inputCheckinTime,
       checkoutDate: inputCheckoutDate,
       checkoutTime: inputCheckoutTime,
-      sightseeing: inputSightseeing,
+      sightseeings: allSightseeings,
+      notes: inputNotes,
     });
     history.push("/myTrips");
+  }
+
+  function handleSightseeingOnClick(e) {
+    e.preventDefault();
+    if (inputSightseeing !== "") {
+      setAllSightseeings([
+        ...allSightseeings,
+        { sightseeing: inputSightseeing },
+      ]);
+    }
+    setInputSightseeing("");
   }
 
   return (
@@ -67,7 +81,12 @@ export default function NewTrip() {
         inputCheckoutDate={inputCheckoutDate}
         setInputCheckoutDate={setInputCheckoutDate}
         setInputCheckoutTime={setInputCheckoutTime}
+        inputSightseeing={inputSightseeing}
         setInputSightseeing={setInputSightseeing}
+        allSightseeings={allSightseeings}
+        setAllSightseeings={setAllSightseeings}
+        setInputNotes={setInputNotes}
+        handleSightseeingOnClick={handleSightseeingOnClick}
       />
     </div>
   );

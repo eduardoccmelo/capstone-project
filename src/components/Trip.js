@@ -96,12 +96,23 @@ export default function Trip() {
             </div>
           </div>
         )}
-        {singleTrip.sightseeing && (
+        {singleTrip.sightseeings.length !== 0 && (
+          <div>
+            <div className="tripDetailsFieldTitle">SIGHTSEEINGS</div>
+            <div className="tripDetailsFieldContent">
+              {singleTrip.sightseeings.map((sightseeing, index) => {
+                if (singleTrip.sightseeings.length === index + 1) {
+                  return sightseeing.sightseeing;
+                }
+                return sightseeing.sightseeing + ", ";
+              })}
+            </div>
+          </div>
+        )}
+        {singleTrip.notes && (
           <div>
             <div className="tripDetailsFieldTitle">NOTES</div>
-            <div className="tripDetailsFieldContent">
-              {singleTrip.sightseeing}
-            </div>
+            <div className="tripDetailsFieldContent">{singleTrip.notes}</div>
           </div>
         )}
       </div>

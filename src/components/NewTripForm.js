@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
+import SightSeeings from "./Sightseeings";
 
 export default function NewTripForm({
   handleOnSubmit,
+  handleSightseeingOnClick,
   inputDestinationName,
   setInputDestinationName,
   inputTripStart,
@@ -18,8 +20,32 @@ export default function NewTripForm({
   inputCheckoutDate,
   setInputCheckoutDate,
   setInputCheckoutTime,
+  allSightseeings,
+  inputSightseeing,
+  setAllSightseeings,
   setInputSightseeing,
+  setInputNotes,
 }) {
+  function renderSightseeings() {
+    const listOfSightseeings = allSightseeings.map((sightSeeing) => {
+      return (
+        <SightSeeings
+          name={sightSeeing.sightseeing}
+          key={sightSeeing.sightseeing}
+          onClickToRemove={handleToRemove}
+        />
+      );
+    });
+    return listOfSightseeings;
+  }
+
+  function handleToRemove(sightseeing) {
+    const newSightseeings = allSightseeings.filter((singleSightseeing) => {
+      return singleSightseeing.sightseeing !== sightseeing;
+    });
+    setAllSightseeings(newSightseeings);
+  }
+
   return (
     <form className="NewTripForm" onSubmit={handleOnSubmit}>
       <div className="formHeader">
@@ -164,13 +190,40 @@ export default function NewTripForm({
           </label>
         </div>
       </div>
-      <div className="formSightseeing">
-        <label className="inputSightseeingForm" htmlFor="sightseeingList">
+      <div className="formSightseeings">
+        <div className="sightSeeingHeader">
+          <label>
+            SIGHTSEEINGS
+            <input
+              type="text"
+              value={inputSightseeing}
+              onChange={(e) => {
+                e.preventDefault();
+                setInputSightseeing(e.target.value);
+              }}
+              id="tripSightseeings"
+              placeholder="Add a Sightseeing"
+            ></input>
+            <button
+              className="addSightseeingButton"
+              onClick={handleSightseeingOnClick}
+            >
+              Add
+            </button>
+          </label>
+        </div>
+
+        <div>
+          <div className="sightseeingsList">{renderSightseeings()}</div>
+        </div>
+      </div>
+      <div className="formNotes">
+        <label className="inputNotesForm" htmlFor="NotesList">
           <textarea
             onChange={(e) => {
-              setInputSightseeing(e.target.value);
+              setInputNotes(e.target.value);
             }}
-            id="sightseeingList"
+            id="NotesList"
             placeholder="Type your travel notes here..."
           ></textarea>
         </label>
