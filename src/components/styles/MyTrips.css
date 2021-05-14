@@ -288,6 +288,7 @@ hr {
   }
   .tripCardInfo i {
     display: inline;
+    margin-right: -5px;
   }
 }
 

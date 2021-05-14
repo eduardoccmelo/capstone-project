@@ -65,7 +65,7 @@ export default function EditTripForm({
             id="tripName"
             type="text"
             placeholder="Type your destination"
-            maxLength="10"
+            maxLength="14"
             required
           ></input>
         </label>

@@ -19,14 +19,12 @@ export default function Trip() {
       <div className="tripDetailsHeader">
         <h2>TRIP DETAILS</h2>
       </div>
+      <div className="tripDetailsTitle">{singleTrip.name}</div>
       <div className="tripDetailsContent">
-        <div>
-          <div className="tripDetailsFieldTitle">NAME</div>
-          <div className="tripDetailsFieldContent">{singleTrip.name}</div>
-        </div>
         <div>
           <div className="tripDetailsFieldTitle">START / END</div>
           <div className="tripDetailsFieldContent">
+            <i className="far fa-calendar-check"></i>
             {singleTrip.start.slice(8, 10)}.{singleTrip.start.slice(5, 7)}
             {" / "}
             {singleTrip.end.slice(8, 10)}.{singleTrip.end.slice(5, 7)}
@@ -34,8 +32,8 @@ export default function Trip() {
         </div>
         {singleTrip.transportation && (
           <div>
-            <div className="tripDetailsFieldTitle">TRANSPORT</div>
-            <div className="tripDetailsFieldContent">
+            <div className="tripDetailsFieldTitle">TRANSPORTATION TYPE</div>
+            <div className="tripDetailsFieldContent capitalize">
               {singleTrip.transportation}
             </div>
           </div>
@@ -44,16 +42,21 @@ export default function Trip() {
           <div>
             <div className="tripDetailsFieldTitle">DEPARTURE</div>
             <div className="tripDetailsFieldContent">
+              <i className="far fa-clock"></i>
               {singleTrip.departure}
             </div>
+            {singleTrip.arrival && (
+              <div>
+                <div className="tripDetailsFieldTitle">ARRIVAL</div>
+                <div className="tripDetailsFieldContent">
+                  <i className="far fa-clock"></i>
+                  {singleTrip.arrival}
+                </div>
+              </div>
+            )}
           </div>
         )}
-        {singleTrip.arrival && (
-          <div>
-            <div className="tripDetailsFieldTitle">ARRIVAL</div>
-            <div className="tripDetailsFieldContent">{singleTrip.arrival}</div>
-          </div>
-        )}
+
         {singleTrip.accommodation && (
           <div>
             <div className="tripDetailsFieldTitle">ACCOMMODATION</div>{" "}
@@ -64,38 +67,44 @@ export default function Trip() {
         )}
         {singleTrip.checkinDate && (
           <div>
-            <div className="tripDetailsFieldTitle">CHECK-IN DATE</div>
+            <div className="tripDetailsFieldTitle">CHECK-IN</div>
             <div className="tripDetailsFieldContent">
+              <i className="far fa-calendar-alt"></i>
               {singleTrip.checkinDate.slice(8, 10)}.
               {singleTrip.checkinDate.slice(5, 7)}
             </div>
+            {singleTrip.checkinTime && (
+              <div>
+                <div className="tripDetailsFieldTitle">TIME</div>
+                <div className="tripDetailsFieldContent">
+                  <i className="far fa-clock"></i>
+                  {singleTrip.checkinTime}
+                </div>
+              </div>
+            )}
           </div>
         )}
-        {singleTrip.checkinTime && (
-          <div>
-            <div className="tripDetailsFieldTitle">CHECK-IN TIME</div>
-            <div className="tripDetailsFieldContent">
-              {singleTrip.checkinTime}
-            </div>
-          </div>
-        )}
+
         {singleTrip.checkoutDate && (
           <div>
-            <div className="tripDetailsFieldTitle">CHECK-OUT DATE</div>
+            <div className="tripDetailsFieldTitle">CHECK-OUT</div>
             <div className="tripDetailsFieldContent">
+              <i className="far fa-calendar-alt"></i>
               {singleTrip.checkoutDate.slice(8, 10)}.
               {singleTrip.checkoutDate.slice(5, 7)}
             </div>
+            {singleTrip.checkoutTime && (
+              <div>
+                <div className="tripDetailsFieldTitle">TIME</div>
+                <div className="tripDetailsFieldContent">
+                  <i className="far fa-clock"></i>
+                  {singleTrip.checkoutTime}
+                </div>
+              </div>
+            )}
           </div>
         )}
-        {singleTrip.checkoutTime && (
-          <div>
-            <div className="tripDetailsFieldTitle">CHECK-OUT TIME</div>
-            <div className="tripDetailsFieldContent">
-              {singleTrip.checkoutTime}
-            </div>
-          </div>
-        )}
+
         {singleTrip.sightseeings.length !== 0 && (
           <div>
             <div className="tripDetailsFieldTitle">SIGHTSEEINGS</div>

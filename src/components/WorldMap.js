@@ -32,8 +32,8 @@ export default function WorldMap() {
   }
 
   const [viewPort, setViewPort] = useState({
-    latitude: 24.123,
-    longitude: 19.123,
+    latitude: 16.123,
+    longitude: 18.123,
     width: `${screenWidth - 30}px`,
     height: "250px",
     zoom: Number(mapZoom),

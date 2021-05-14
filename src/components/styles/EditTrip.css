@@ -76,6 +76,7 @@
   width: 320px;
   height: 100px;
   margin-top: 2px;
+  padding: 3px;
   font-size: 12px;
 }
 
@@ -191,9 +192,9 @@
 
 .sightseeingItem {
   margin: 10px 20px 0 20px;
-  color: white;
-  border: solid 2px rgb(255, 255, 255);
-  background-color: rgba(50, 71, 88, 0.3);
+  color: black;
+  border: solid 2px rgb(0, 0, 0);
+  background-color: rgba(255, 255, 255, 0.85);
   display: flex;
   padding: 10px;
   align-items: center;
@@ -203,17 +204,26 @@
   position: relative;
 }
 
+input,
+textarea {
+  border: solid 1px rgb(0, 0, 0);
+  padding: 2px;
+}
+
 .sightseeingItem button {
   margin-left: 5px;
   position: absolute;
   border-radius: 10px;
   border: none;
-  background-color: rgb(238, 186, 186);
+  background-color: rgb(88, 10, 10);
+  color: white;
   right: 2px;
   height: 16px;
-  width: 16px;
   font-size: 0.9em;
   cursor: pointer;
+  width: 25px;
+  text-align: center;
+  padding-left: 2px;
 }
 
 .addSightseeingButton {
@@ -225,7 +235,7 @@
   cursor: pointer;
 }
 
-@media only screen and (max-width: 350px) {
+@media only screen and (max-width: 365px) {
   .formHeader,
   .formTravelDates,
   .formTransport,

@@ -59,7 +59,7 @@ export default function NewTripForm({
             id="tripName"
             type="text"
             placeholder="Type your destination"
-            maxLength="15"
+            maxLength="14"
             required
           ></input>
         </label>
