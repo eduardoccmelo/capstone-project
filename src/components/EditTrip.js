@@ -24,6 +24,10 @@ export default function EditTrip() {
   const [inputCheckoutTime, setInputCheckoutTime] = useState("");
   const [inputSightseeing, setInputSightseeing] = useState("");
   const [allSightseeings, setAllSightseeings] = useState([]);
+  const [currency, setCurrency] = useState("€");
+  const [inputExpenseName, setInputExpenseName] = useState("");
+  const [inputExpenseValue, setInputExpenseValue] = useState(0);
+  const [allExpenses, setAllExpenses] = useState([]);
   const [inputNotes, setInputNotes] = useState("");
 
   function handleOnSubmit(e) {
@@ -42,6 +46,7 @@ export default function EditTrip() {
       checkoutDate: inputCheckoutDate,
       checkoutTime: inputCheckoutTime,
       sightseeings: allSightseeings,
+      expenses: allExpenses,
       notes: inputNotes,
     });
     history.push(`/myTrips/${id}`);
@@ -61,6 +66,7 @@ export default function EditTrip() {
     setInputCheckoutDate(myTrip.checkoutDate);
     setInputCheckoutTime(myTrip.checkinTime);
     setAllSightseeings(myTrip.sightseeings);
+    setAllExpenses(myTrip.expenses);
     setInputNotes(myTrip.notes);
   }, [id]);
 
@@ -73,6 +79,22 @@ export default function EditTrip() {
       ]);
     }
     setInputSightseeing("");
+  }
+
+  function handleExpenseOnClick(e) {
+    e.preventDefault();
+    if (inputExpenseName !== "") {
+      setAllExpenses([
+        ...allExpenses,
+        {
+          name: inputExpenseName,
+          value: Number(inputExpenseValue),
+          currency: currency,
+        },
+      ]);
+    }
+    setInputExpenseName("");
+    setInputExpenseValue(0);
   }
 
   return (
@@ -111,6 +133,15 @@ export default function EditTrip() {
         setAllSightseeings={setAllSightseeings}
         inputNotes={inputNotes}
         handleSightseeingOnClick={handleSightseeingOnClick}
+        allExpenses={allExpenses}
+        setAllExpenses={setAllExpenses}
+        inputExpenseName={inputExpenseName}
+        setInputExpenseName={setInputExpenseName}
+        inputExpenseValue={inputExpenseValue}
+        setInputExpenseValue={setInputExpenseValue}
+        handleExpenseOnClick={handleExpenseOnClick}
+        currency={currency}
+        setCurrency={setCurrency}
       />
     </div>
   );

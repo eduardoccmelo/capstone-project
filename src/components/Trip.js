@@ -14,6 +14,13 @@ export default function Trip() {
     setSingleTrip(myTrip);
   }, [id]);
 
+  function sumFunction() {
+    const sum = singleTrip.expenses.reduce(function (prev, cur) {
+      return prev + cur.value;
+    }, 0);
+    return `${singleTrip.expenses[0].currency}${sum}`;
+  }
+
   return singleTrip ? (
     <div className="TripDetails">
       <div className="tripDetailsHeader">
@@ -116,6 +123,12 @@ export default function Trip() {
                 return sightseeing.sightseeing + ", ";
               })}
             </div>
+          </div>
+        )}
+        {singleTrip.expenses.length !== 0 && (
+          <div>
+            <div className="tripDetailsFieldTitle">EXPENSES</div>
+            <div className="tripDetailsFieldContent">{sumFunction()}</div>
           </div>
         )}
         {singleTrip.notes && (

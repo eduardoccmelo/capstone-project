@@ -19,6 +19,10 @@ export default function NewTrip() {
   const [inputCheckoutTime, setInputCheckoutTime] = useState("");
   const [inputSightseeing, setInputSightseeing] = useState("");
   const [allSightseeings, setAllSightseeings] = useState([]);
+  const [currency, setCurrency] = useState("€");
+  const [inputExpenseName, setInputExpenseName] = useState("");
+  const [inputExpenseValue, setInputExpenseValue] = useState(0);
+  const [allExpenses, setAllExpenses] = useState([]);
   const [inputNotes, setInputNotes] = useState("");
   const history = useHistory();
 
@@ -42,6 +46,7 @@ export default function NewTrip() {
       checkoutDate: inputCheckoutDate,
       checkoutTime: inputCheckoutTime,
       sightseeings: allSightseeings,
+      expenses: allExpenses,
       notes: inputNotes,
     });
     history.push("/myTrips");
@@ -56,6 +61,21 @@ export default function NewTrip() {
       ]);
     }
     setInputSightseeing("");
+  }
+  function handleExpenseOnClick(e) {
+    e.preventDefault();
+    if (inputExpenseName !== "") {
+      setAllExpenses([
+        ...allExpenses,
+        {
+          name: inputExpenseName,
+          value: Number(inputExpenseValue),
+          currency: currency,
+        },
+      ]);
+    }
+    setInputExpenseName("");
+    setInputExpenseValue(0);
   }
 
   return (
@@ -87,6 +107,15 @@ export default function NewTrip() {
         setAllSightseeings={setAllSightseeings}
         setInputNotes={setInputNotes}
         handleSightseeingOnClick={handleSightseeingOnClick}
+        allExpenses={allExpenses}
+        setAllExpenses={setAllExpenses}
+        inputExpenseName={inputExpenseName}
+        setInputExpenseName={setInputExpenseName}
+        inputExpenseValue={inputExpenseValue}
+        setInputExpenseValue={setInputExpenseValue}
+        handleExpenseOnClick={handleExpenseOnClick}
+        currency={currency}
+        setCurrency={setCurrency}
       />
     </div>
   );

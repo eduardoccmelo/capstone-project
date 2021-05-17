@@ -45,7 +45,8 @@
   border: rgb(255, 255, 255) solid 2px;
 }
 
-.formSightseeings {
+.formSightseeings,
+.formExpenses {
   display: flex;
   flex-direction: column;
   width: 350px;
@@ -193,8 +194,15 @@
   border: rgb(255, 255, 255) solid 2px;
 }
 
-.sightSeeingHeader {
+.sightSeeingHeader,
+.expensesHeader {
   align-self: center;
+}
+
+.expensesSum {
+  margin-top: 5px;
+  font-size: 18px;
+  text-align: center;
 }
 
 .sightSeeingHeader input {
@@ -202,7 +210,23 @@
   width: 150px;
 }
 
-.sightseeingItem {
+.expensesHeader input:nth-child(1) {
+  margin: 0 0 0 4px;
+  width: 115px;
+}
+
+.expensesHeader input:nth-child(2) {
+  margin: 0 4px 0 4px;
+  width: 52px;
+}
+
+.expensesHeader select {
+  margin: 0 4px 0 0;
+  width: 34px;
+}
+
+.sightseeingItem,
+.expenseItem {
   margin: 10px 20px 0 20px;
   color: black;
   border: solid 2px rgb(0, 0, 0);
@@ -216,7 +240,8 @@
   position: relative;
 }
 
-.sightseeingItem button {
+.sightseeingItem button,
+.expenseItem button {
   margin-left: 5px;
   position: absolute;
   border-radius: 10px;
@@ -232,7 +257,8 @@
   padding-left: 2px;
 }
 
-.addSightseeingButton {
+.addSightseeingButton,
+.addExpenseButton {
   background-color: rgb(9, 65, 9);
   color: white;
   border-radius: 5px;
@@ -251,12 +277,28 @@
     font-size: 0.8em;
     text-align: center;
   }
-  .formSightseeings {
+  .formSightseeings,
+  .formExpenses {
     width: 290px;
     font-size: 0.8em;
+    padding: 10px 2px;
   }
   .sightSeeingHeader input {
     width: 140px;
+  }
+  .expensesHeader input:nth-child(1) {
+    margin: 0 0 0 2px;
+    width: 100px;
+  }
+
+  .expensesHeader input:nth-child(2) {
+    margin: 0 2px 0 2px;
+    width: 45px;
+  }
+
+  .expensesHeader select {
+    margin: 0 3px 0 0;
+    width: 33px;
   }
 
   .inputTranportTimeForm {
