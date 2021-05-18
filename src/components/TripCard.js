@@ -10,9 +10,19 @@ export default function TripCard({
   startMonth,
   endDay,
   endMonth,
+  endDate,
 }) {
+  function classTripDate() {
+    const today = new Date();
+    if (today.valueOf() - 100000000 < new Date(endDate).valueOf()) {
+      return "myTripsItem";
+    } else {
+      return "pastTripItem";
+    }
+  }
+
   return (
-    <div key={id} className="myTripsItem">
+    <div key={id} className={classTripDate()}>
       <button className="removeButton" onClick={() => handleRemoveTrip(name)}>
         <i className="fas fa-trash-alt"></i>
       </button>

@@ -32,9 +32,15 @@ export default function Trip() {
           <div className="tripDetailsFieldTitle">START / END</div>
           <div className="tripDetailsFieldContent">
             <i className="far fa-calendar-check"></i>
-            {singleTrip.start.slice(8, 10)}.{singleTrip.start.slice(5, 7)}
+            {singleTrip.start.slice(8, 10)}.
+            {new Date(singleTrip.start).toLocaleString("default", {
+              month: "short",
+            })}
             {" / "}
-            {singleTrip.end.slice(8, 10)}.{singleTrip.end.slice(5, 7)}
+            {singleTrip.end.slice(8, 10)}.
+            {new Date(singleTrip.end).toLocaleString("default", {
+              month: "short",
+            })}
           </div>
         </div>
         {singleTrip.transportation && (
@@ -78,7 +84,9 @@ export default function Trip() {
             <div className="tripDetailsFieldContent">
               <i className="far fa-calendar-alt"></i>
               {singleTrip.checkinDate.slice(8, 10)}.
-              {singleTrip.checkinDate.slice(5, 7)}
+              {new Date(singleTrip.checkinDate).toLocaleString("default", {
+                month: "short",
+              })}
             </div>
             {singleTrip.checkinTime && (
               <div>
@@ -98,7 +106,9 @@ export default function Trip() {
             <div className="tripDetailsFieldContent">
               <i className="far fa-calendar-alt"></i>
               {singleTrip.checkoutDate.slice(8, 10)}.
-              {singleTrip.checkoutDate.slice(5, 7)}
+              {new Date(singleTrip.checkoutDate).toLocaleString("default", {
+                month: "short",
+              })}
             </div>
             {singleTrip.checkoutTime && (
               <div>
