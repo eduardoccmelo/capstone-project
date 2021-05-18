@@ -28,34 +28,53 @@
   display: flex;
   align-self: center;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   width: 350px;
   padding: 10px;
-  margin-top: 15px;
+  margin-top: 10px;
   font-size: 0.9em;
   border-radius: 10px;
   color: white;
+}
+.tripDetailsContent i {
+  margin-right: 5px;
 }
 
 .tripDetailsFieldTitle {
   border-radius: 10px 0 0 10px;
   padding: 8px;
-  margin: 2px;
+  margin: 2px -2px 10px 8px;
   color: white;
   background-color: rgba(37, 57, 73, 1);
   border: black solid 2px;
+  font-weight: 600;
 }
 .tripDetailsContent div {
   display: inline-flex;
   align-items: center;
-  text-transform: capitalize;
   text-align: left;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.tripDetailsTitle {
+  margin-top: 10px;
+  font-size: 34px;
+  text-transform: uppercase;
+  align-self: center;
+  font-weight: 700;
+  box-shadow: 2px 2px 5px #000000;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 25px;
+  padding: 10px 15px;
 }
 
 .tripDetailsFieldContent {
   border-radius: 0 10px 10px 0;
   padding: 8px;
-  margin: 2px;
+  margin: 2px 0 10px 0;
   color: rgb(0, 0, 0);
   border: rgb(0, 0, 0) solid 2px;
   background-color: rgb(255, 255, 255);
@@ -111,5 +130,8 @@
   .tripDetailsContent {
     width: 310px;
     font-size: 0.8em;
+  }
+  .tripDetailsTitle {
+    font-size: 26px;
   }
 }

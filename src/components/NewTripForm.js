@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
+import SightSeeings from "./Sightseeings";
+import Expense from "./Expenses";
 
 export default function NewTripForm({
   handleOnSubmit,
+  handleSightseeingOnClick,
+  handleExpenseOnClick,
   inputDestinationName,
   setInputDestinationName,
   inputTripStart,
@@ -18,8 +22,68 @@ export default function NewTripForm({
   inputCheckoutDate,
   setInputCheckoutDate,
   setInputCheckoutTime,
+  allSightseeings,
+  inputSightseeing,
+  setAllSightseeings,
   setInputSightseeing,
+  allExpenses,
+  setAllExpenses,
+  inputExpenseName,
+  setInputExpenseName,
+  inputExpenseValue,
+  setInputExpenseValue,
+  currency,
+  setCurrency,
+  setInputNotes,
 }) {
+  function renderSightseeings() {
+    const listOfSightseeings = allSightseeings.map((sightSeeing) => {
+      return (
+        <SightSeeings
+          name={sightSeeing.sightseeing}
+          key={sightSeeing.sightseeing}
+          onClickToRemove={handleToRemove}
+        />
+      );
+    });
+    return listOfSightseeings;
+  }
+
+  function renderExpenses() {
+    const listOfExpenses = allExpenses.map((expense) => {
+      return (
+        <Expense
+          name={expense.name}
+          value={expense.value}
+          key={expense.name + expense.value}
+          onClickExpenseRemove={handleRemoveExpense}
+          currency={currency}
+        />
+      );
+    });
+    return listOfExpenses;
+  }
+
+  function handleToRemove(sightseeing) {
+    const newSightseeings = allSightseeings.filter((singleSightseeing) => {
+      return singleSightseeing.sightseeing !== sightseeing;
+    });
+    setAllSightseeings(newSightseeings);
+  }
+  function handleRemoveExpense(expense) {
+    const newExpenses = allExpenses.filter((singleExpense) => {
+      return singleExpense.name !== expense;
+    });
+    setAllExpenses(newExpenses);
+  }
+
+  function sumFunction() {
+    const sum = allExpenses.reduce(function (prev, cur) {
+      return prev + cur.value;
+    }, 0);
+    return sum;
+  }
+
   return (
     <form className="NewTripForm" onSubmit={handleOnSubmit}>
       <div className="formHeader">
@@ -33,7 +97,7 @@ export default function NewTripForm({
             id="tripName"
             type="text"
             placeholder="Type your destination"
-            maxLength="15"
+            maxLength="14"
             required
           ></input>
         </label>
@@ -164,13 +228,85 @@ export default function NewTripForm({
           </label>
         </div>
       </div>
-      <div className="formSightseeing">
-        <label className="inputSightseeingForm" htmlFor="sightseeingList">
+      <div className="formSightseeings">
+        <div className="sightSeeingHeader">
+          <label>
+            SIGHTSEEINGS
+            <input
+              type="text"
+              value={inputSightseeing}
+              onChange={(e) => {
+                e.preventDefault();
+                setInputSightseeing(e.target.value);
+              }}
+              id="tripSightseeings"
+              placeholder="New Sightseeing"
+            ></input>
+            <button
+              className="addSightseeingButton"
+              onClick={handleSightseeingOnClick}
+            >
+              Add
+            </button>
+          </label>
+        </div>
+        <div>
+          <div className="sightseeingsList">{renderSightseeings()}</div>
+        </div>
+      </div>
+      <div className="formExpenses">
+        <div className="expensesHeader">
+          <label>
+            EXPENSES
+            <input
+              type="text"
+              value={inputExpenseName}
+              onChange={(e) => {
+                e.preventDefault();
+                setInputExpenseName(e.target.value);
+              }}
+              id="tripExpensesName"
+              placeholder="New Expense"
+            ></input>
+            <input
+              type="number"
+              value={inputExpenseValue}
+              onChange={(e) => {
+                e.preventDefault();
+                setInputExpenseValue(e.target.value);
+              }}
+              id="tripExpensesNameValue"
+            ></input>
+            <select
+              onChange={(e) => {
+                setCurrency(e.target.value);
+              }}
+              id="tripExpensesCurrency"
+            >
+              <option value="€">€</option>
+              <option value="$">$</option>
+              <option value="£">£</option>
+            </select>
+            <button className="addExpenseButton" onClick={handleExpenseOnClick}>
+              Add
+            </button>
+          </label>
+        </div>
+        <div>
+          <div>{renderExpenses()}</div>
+          <p className="expensesSum">
+            {currency}
+            {sumFunction()}
+          </p>
+        </div>
+      </div>
+      <div className="formNotes">
+        <label className="inputNotesForm" htmlFor="NotesList">
           <textarea
             onChange={(e) => {
-              setInputSightseeing(e.target.value);
+              setInputNotes(e.target.value);
             }}
-            id="sightseeingList"
+            id="NotesList"
             placeholder="Type your travel notes here..."
           ></textarea>
         </label>
