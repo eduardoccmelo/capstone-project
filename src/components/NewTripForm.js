@@ -241,6 +241,7 @@ export default function NewTripForm({
               }}
               id="tripSightseeings"
               placeholder="New Sightseeing"
+              maxLength="14"
             ></input>
             <button
               className="addSightseeingButton"
@@ -260,6 +261,7 @@ export default function NewTripForm({
             EXPENSES
             <input
               type="text"
+              maxLength="13"
               value={inputExpenseName}
               onChange={(e) => {
                 e.preventDefault();
@@ -270,6 +272,13 @@ export default function NewTripForm({
             ></input>
             <input
               type="number"
+              min="0"
+              max="9999"
+              onInput={(e) => {
+                if (e.target.value.length > 4) {
+                  e.target.value = e.target.value.slice(0, 4);
+                }
+              }}
               value={inputExpenseValue}
               onChange={(e) => {
                 e.preventDefault();

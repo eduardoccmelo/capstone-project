@@ -35,15 +35,21 @@ export default function MyTrips() {
   function renderMyTrips() {
     return trips.map((trip) => {
       const startDay = trip.start.slice(8, 10);
-      const startMonth = trip.start.slice(5, 7);
+      const startMonth = new Date(trip.start).toLocaleString("default", {
+        month: "short",
+      });
       const endDay = trip.end.slice(8, 10);
-      const endMonth = trip.end.slice(5, 7);
+      const endMonth = new Date(trip.end).toLocaleString("default", {
+        month: "short",
+      });
+
       return (
         <TripCard
           key={trip.id}
           handleRemoveTrip={handleRemoveTrip}
           name={trip.name}
           id={trip.id}
+          endDate={trip.end}
           transportation={trip.transportation}
           startDay={startDay}
           startMonth={startMonth}
