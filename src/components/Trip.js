@@ -3,11 +3,22 @@ import { useHistory, useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { getSingleTripFromLocalStorage } from "../services/myTripsStorage";
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 export default function Trip() {
   const history = useHistory();
   const [singleTrip, setSingleTrip] = useState();
   const { id } = useParams();
+  const container = {
+    hidden: { opacity: 0, scale: 0 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.1,
+      },
+    },
+  };
 
   useEffect(() => {
     const myTrip = getSingleTripFromLocalStorage(id);
@@ -27,7 +38,12 @@ export default function Trip() {
         <h2>TRIP DETAILS</h2>
       </div>
       <div className="tripDetailsTitle">{singleTrip.name}</div>
-      <div className="tripDetailsContent">
+      <motion.div
+        variants={container}
+        initial="hidden"
+        animate="visible"
+        className="tripDetailsContent"
+      >
         <div>
           <div className="tripDetailsFieldTitle">START / END</div>
           <div className="tripDetailsFieldContent">
@@ -147,7 +163,7 @@ export default function Trip() {
             <div className="tripDetailsFieldContent">{singleTrip.notes}</div>
           </div>
         )}
-      </div>
+      </motion.div>
       <div className="tripDetailsFooter">
         <Link className="editLink" to={`/myTrips/${singleTrip.id}/edit`}>
           <button className="editTripButton">Edit</button>
