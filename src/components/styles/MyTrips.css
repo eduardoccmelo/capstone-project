@@ -215,7 +215,7 @@ hr {
     display: flex;
     align-items: center;
     position: relative;
-    width: 220px;
+    width: 280px;
     height: 100px;
     margin: 5px;
     padding: 5px;
@@ -229,7 +229,7 @@ hr {
     display: flex;
     align-items: center;
     position: relative;
-    width: 220px;
+    width: 280px;
     height: 100px;
     margin: 5px;
     padding: 5px;
@@ -296,7 +296,7 @@ hr {
     width: 330px;
   }
   .tripName {
-    font-size: 18px;
+    font-size: 14px;
     margin-left: 10px;
   }
   .tripViewButton {
@@ -327,6 +327,6 @@ hr {
     width: 420px;
   }
   .tripName {
-    font-size: 24px;
+    font-size: 20px;
   }
 }
