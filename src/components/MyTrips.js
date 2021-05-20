@@ -2,11 +2,22 @@ import "./styles/MyTrips.css";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getTripsFromLocalStorage } from "../services/myTripsStorage";
-
+import { AnimatePresence, motion } from "framer-motion";
 import TripCard from "./TripCard";
 
 export default function MyTrips() {
   const [trips, setTrips] = useState([]);
+
+  const Item = ({ children }) => (
+    <motion.div {...motionProps}>{children}</motion.div>
+  );
+
+  const motionProps = {
+    exit: { opacity: 0, scale: 0, x: -800 },
+    transition: {
+      duration: 0.5,
+    },
+  };
 
   useEffect(() => {
     const myTrips = getTripsFromLocalStorage();
@@ -44,18 +55,19 @@ export default function MyTrips() {
       });
 
       return (
-        <TripCard
-          key={trip.id}
-          handleRemoveTrip={handleRemoveTrip}
-          name={trip.name}
-          id={trip.id}
-          endDate={trip.end}
-          transportation={trip.transportation}
-          startDay={startDay}
-          startMonth={startMonth}
-          endDay={endDay}
-          endMonth={endMonth}
-        />
+        <Item key={trip.id}>
+          <TripCard
+            handleRemoveTrip={handleRemoveTrip}
+            name={trip.name}
+            id={trip.id}
+            endDate={trip.end}
+            transportation={trip.transportation}
+            startDay={startDay}
+            startMonth={startMonth}
+            endDay={endDay}
+            endMonth={endMonth}
+          />
+        </Item>
       );
     });
   }
@@ -71,7 +83,7 @@ export default function MyTrips() {
         {trips.length < 1 && (
           <p className="noTripsText">You don't have any trips yet</p>
         )}
-        {renderMyTrips()}
+        <AnimatePresence>{renderMyTrips()}</AnimatePresence>
       </div>
 
       <div className="myTripsFooter">
