@@ -100,12 +100,12 @@
 }
 
 .mapboxMap {
-  border: solid 2px rgb(255, 255, 255);
   align-self: center;
-  box-shadow: 2px 2px 5px #181212;
   position: -webkit-sticky;
   position: sticky;
   top: 10px;
+  border: solid 2px rgb(255, 255, 255);
+  box-shadow: 2px 2px 5px #181212;
 }
 
 .travelMapButtonHome:hover,
@@ -143,12 +143,12 @@
   font-size: 16px;
   margin-top: 5px;
   padding: 10px 0 10px 0;
-  color: white;
-  border: solid 2px rgb(255, 255, 255);
-  background-color: rgba(37, 57, 73, 1);
   position: -webkit-sticky;
   position: sticky;
   top: 270px;
+  color: white;
+  border: solid 2px rgb(255, 255, 255);
+  background-color: rgba(37, 57, 73, 1);
 }
 
 .countryFilter input {
@@ -191,8 +191,8 @@
   font-size: 1em;
   cursor: pointer;
   color: rgb(2, 31, 2);
-  box-shadow: 2px 2px 5px #000000;
   border-radius: 50%;
+  box-shadow: 2px 2px 5px #000000;
   border: 1px solid white;
 }
 
@@ -210,20 +210,20 @@
 }
 
 .mapboxgl-popup-content {
-  box-shadow: 2px 2px 5px #000000;
   padding: 10px 30px 10px 10px;
-  background-color: rgba(37, 57, 73, 1);
+  box-shadow: 2px 2px 5px #000000;
   color: white;
+  background-color: rgba(37, 57, 73, 1);
 }
 
 .mapboxgl-popup-content button {
   font-weight: 700;
-  background-color: darkred;
   color: white;
   font-size: 20px;
   height: 100%;
   margin-left: 20px;
   padding: 5px;
+  background-color: darkred;
 }
 
 .mapboxgl-popup-content button:hover {

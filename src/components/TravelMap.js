@@ -20,6 +20,7 @@ export default function TravelMap({
     right: 10,
     top: 10,
   };
+
   return (
     <ReactMapGl
       {...viewPort}

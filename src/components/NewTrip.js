@@ -1,9 +1,8 @@
-import "./styles/NewTrip.css";
 import { useHistory } from "react-router";
-
 import { useState } from "react";
 import { addTripToLocalStorage } from "../services/myTripsStorage";
-import NewTripForm from "./NewTripForm";
+import Form from "./Form";
+import "./styles/Form.css";
 
 export default function NewTrip() {
   const [inputDestinationName, setInputDestinationName] = useState("");
@@ -21,7 +20,7 @@ export default function NewTrip() {
   const [allSightseeings, setAllSightseeings] = useState([]);
   const [currency, setCurrency] = useState("€");
   const [inputExpenseName, setInputExpenseName] = useState("");
-  const [inputExpenseValue, setInputExpenseValue] = useState(0);
+  const [inputExpenseValue, setInputExpenseValue] = useState("");
   const [allExpenses, setAllExpenses] = useState([]);
   const [inputNotes, setInputNotes] = useState("");
   const history = useHistory();
@@ -83,39 +82,46 @@ export default function NewTrip() {
       <div className="newTripHeader">
         <h2>NEW TRIP</h2>
       </div>
-      <NewTripForm
+      <Form
         handleOnSubmit={handleOnSubmit}
+        handleSightseeingOnClick={handleSightseeingOnClick}
+        handleExpenseOnClick={handleExpenseOnClick}
         inputDestinationName={inputDestinationName}
         setInputDestinationName={setInputDestinationName}
         inputTripStart={inputTripStart}
         setInputTripStart={setInputTripStart}
         inputTripEnd={inputTripEnd}
         setInputTripEnd={setInputTripEnd}
+        inputTransportType={inputTransportType}
         setInputTransportType={setInputTransportType}
+        inputTripDeparture={inputTripDeparture}
         setInputTripDeparture={setInputTripDeparture}
+        inputTripArrival={inputTripArrival}
         setInputTripArrival={setInputTripArrival}
+        inputTripAccommodation={inputTripAccommodation}
         setInputTripAccommodation={setInputTripAccommodation}
         inputCheckinDate={inputCheckinDate}
         setInputCheckinDate={setInputCheckinDate}
+        inputCheckinTime={inputCheckinTime}
         setInputCheckinTime={setInputCheckinTime}
         inputCheckoutDate={inputCheckoutDate}
         setInputCheckoutDate={setInputCheckoutDate}
+        inputCheckoutTime={inputCheckoutTime}
         setInputCheckoutTime={setInputCheckoutTime}
         inputSightseeing={inputSightseeing}
         setInputSightseeing={setInputSightseeing}
         allSightseeings={allSightseeings}
         setAllSightseeings={setAllSightseeings}
-        setInputNotes={setInputNotes}
-        handleSightseeingOnClick={handleSightseeingOnClick}
         allExpenses={allExpenses}
         setAllExpenses={setAllExpenses}
         inputExpenseName={inputExpenseName}
         setInputExpenseName={setInputExpenseName}
         inputExpenseValue={inputExpenseValue}
         setInputExpenseValue={setInputExpenseValue}
-        handleExpenseOnClick={handleExpenseOnClick}
         currency={currency}
         setCurrency={setCurrency}
+        inputNotes={inputNotes}
+        setInputNotes={setInputNotes}
       />
     </div>
   );
