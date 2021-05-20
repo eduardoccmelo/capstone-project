@@ -2,7 +2,7 @@ import "./styles/MyTrips.css";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getTripsFromLocalStorage } from "../services/myTripsStorage";
-import { AnimatePresence, motion } from "framer-motion";
+
 import TripCard from "./TripCard";
 
 export default function MyTrips() {
@@ -12,17 +12,6 @@ export default function MyTrips() {
     const myTrips = getTripsFromLocalStorage();
     setTrips(myTrips);
   }, []);
-
-  const Item = ({ children }) => (
-    <motion.div {...motionProps}>{children}</motion.div>
-  );
-
-  const motionProps = {
-    exit: { opacity: 0, scale: 0, x: -800 },
-    transition: {
-      duration: 0.5,
-    },
-  };
 
   function handleRemoveTrip(name) {
     const confirmation = window.confirm(
@@ -55,19 +44,18 @@ export default function MyTrips() {
       });
 
       return (
-        <Item key={trip.id}>
-          <TripCard
-            handleRemoveTrip={handleRemoveTrip}
-            name={trip.name}
-            id={trip.id}
-            endDate={trip.end}
-            transportation={trip.transportation}
-            startDay={startDay}
-            startMonth={startMonth}
-            endDay={endDay}
-            endMonth={endMonth}
-          />
-        </Item>
+        <TripCard
+          key={trip.id}
+          handleRemoveTrip={handleRemoveTrip}
+          name={trip.name}
+          id={trip.id}
+          endDate={trip.end}
+          transportation={trip.transportation}
+          startDay={startDay}
+          startMonth={startMonth}
+          endDay={endDay}
+          endMonth={endMonth}
+        />
       );
     });
   }
@@ -79,12 +67,11 @@ export default function MyTrips() {
           <i className="fas fa-plus"></i>
         </Link>
       </div>
-
       <div className="myTripsMain">
         {trips.length < 1 && (
           <p className="noTripsText">You don't have any trips yet</p>
         )}
-        <AnimatePresence>{renderMyTrips()}</AnimatePresence>
+        {renderMyTrips()}
       </div>
 
       <div className="myTripsFooter">
