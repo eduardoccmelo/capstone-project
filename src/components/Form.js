@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import SightSeeings from "./Sightseeings";
 import Expense from "./Expenses";
 
-export default function EditTripForm({
+export default function Form({
   handleOnSubmit,
   handleSightseeingOnClick,
   handleExpenseOnClick,
@@ -77,7 +77,6 @@ export default function EditTripForm({
     });
     setAllSightseeings(newSightseeings);
   }
-
   function handleRemoveExpense(expense) {
     const newExpenses = allExpenses.filter((singleExpense) => {
       return singleExpense.name !== expense;
@@ -93,7 +92,7 @@ export default function EditTripForm({
   }
 
   return (
-    <form className="EditTripForm" onSubmit={handleOnSubmit}>
+    <form className="TripForm" onSubmit={handleOnSubmit}>
       <div className="formHeader">
         <label className="tripNameForm" htmlFor="tripName">
           Destination Name
@@ -302,6 +301,7 @@ export default function EditTripForm({
                 setInputExpenseValue(e.target.value);
               }}
               id="tripExpensesNameValue"
+              placeholder="0"
             ></input>
             <select
               onChange={(e) => {
@@ -339,12 +339,12 @@ export default function EditTripForm({
           ></textarea>
         </label>
       </div>
-      <div className="editTripFooter">
-        <button className="editFromTripButton" type="submit">
+      <div className="tripFooter">
+        <button className="formTripButton" type="submit">
           Confirm
         </button>
         <Link className="cancelTrip" to="/myTrips">
-          <button className="editTripCancelButton">Cancel</button>
+          <button className="tripCancelButton">Cancel</button>
         </Link>
       </div>
     </form>
