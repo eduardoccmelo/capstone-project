@@ -105,16 +105,9 @@
 }
 
 .noTripsText {
-  display: grid;
-  justify-items: center;
-  align-items: center;
-  margin: 10px;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: -1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .myTripsMain {
@@ -210,6 +203,7 @@ hr {
   }
   .noTripsText {
     font-size: 16px;
+    margin-top: 20vh;
   }
   .myTripsItem {
     display: flex;
@@ -290,6 +284,7 @@ hr {
   }
   .noTripsText {
     font-size: 22px;
+    margin-top: 33vh;
   }
   .myTripsItem,
   .pastTripItem {
